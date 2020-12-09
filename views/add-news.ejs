@@ -1,0 +1,12 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%- include('includes/nav.ejs') %>
+    <main>
+        <h1>Hello on the forum Add News Page!</h1>
+        <form action="/admin/add-news" method="POST">
+            <input type="text" name="title">
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <%- include('includes/end.ejs') %>

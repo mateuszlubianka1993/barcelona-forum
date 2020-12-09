@@ -6,15 +6,21 @@ const rootDir = require('../utils/path');
 
 const router = express.Router();
 
+const news = [];
+
 router.get('/add-news', (req, res, next) => {
 
-    res.sendFile(path.join(rootDir, 'views', 'add-news.html'));
+    res.render('add-news', {
+        pageTitle: 'Forum Add News Page',
+        path: '/admin/add-news',
+    });
 });
 
 router.post('/add-news', (req, res, next) => {
 
-    console.log(req.body);
+    news.push({title: req.body.title});
     res.redirect('/');
 });
 
-module.exports = router;
+exports.routes = router;
+exports.news = news;
