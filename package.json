@@ -1,0 +1,22 @@
+{
+  "name": "barcelona-forum",
+  "version": "1.0.0",
+  "description": "Forum for Fc Barcelona fans.",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateuszlubianka1993/barcelona-forum.git"
+  },
+  "author": "mateuszlubianka1993",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mateuszlubianka1993/barcelona-forum/issues"
+  },
+  "homepage": "https://github.com/mateuszlubianka1993/barcelona-forum#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
