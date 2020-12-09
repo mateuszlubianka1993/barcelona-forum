@@ -1,4 +1,4 @@
-const news = [];
+const News = require('../models/news');
 
 exports.getAddNews = (req, res, next) => {
     res.render('add-news', {
@@ -8,15 +8,19 @@ exports.getAddNews = (req, res, next) => {
 }
 
 exports.postAddNews = (req, res, next) => {
-    news.push({title: req.body.title});
+    const singleNews = new News(req.body.title);
+    singleNews.save();
+
     res.redirect('/');
 }
 
-exports.getHome = (req, res, next) => {    
-    res.render('home', {
-        pageTitle: 'Forum Home Page',
-        news: news,
-        path: '/',
-        hasNews: news.length > 0,
+exports.getHome = (req, res, next) => {   
+    News.fetchAll(news => {
+        res.render('home', {
+            pageTitle: 'Forum Home Page',
+            news: news,
+            path: '/',
+            hasNews: news.length > 0,
+        });
     });
 }
