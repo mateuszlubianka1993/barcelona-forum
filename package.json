@@ -4,7 +4,9 @@
   "description": "Forum for Fc Barcelona fans.",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
   },
   "repository": {
     "type": "git",
