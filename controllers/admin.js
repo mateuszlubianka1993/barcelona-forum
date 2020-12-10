@@ -8,7 +8,12 @@ exports.getAddNews = (req, res, next) => {
 }
 
 exports.postAddNews = (req, res, next) => {
-    const singleNews = new News(req.body.title);
+    const title = req.body.title;
+    const imageUrl = req.body.imageUrl;
+    const description = req.body.description;
+    const content = req.body.content;
+
+    const singleNews = new News(title, imageUrl, description, content);
     singleNews.save();
 
     res.redirect('/');

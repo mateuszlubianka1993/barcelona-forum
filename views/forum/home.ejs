@@ -8,6 +8,9 @@
             <h2>News list</h2>
             <% for (let newsItem of news) { %>
                 <div><%= newsItem.title %></div>
+                <div><%= newsItem.imageUrl %></div>
+                <div><%= newsItem.description %></div>
+                <div><%= newsItem.content %></div>
             <% } %>
         <% } else { %>
             <h2>There are not any news.</h2>

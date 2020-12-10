@@ -4,8 +4,11 @@ const path = require('path');
 const rootDir = require('../utils/path');''
 
 module.exports = class News {
-    constructor(title) {
+    constructor(title, imageUrl, description, content) {
         this.title = title;
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.content = content;
     }
 
     save() {
