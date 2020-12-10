@@ -17,7 +17,8 @@ const getItemsFromFile = (callback) => {
 }
 
 module.exports = class News {
-    constructor(title, imageUrl, description, content) {
+    constructor(id, title, imageUrl, description, content) {
+        this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;
@@ -25,13 +26,22 @@ module.exports = class News {
     }
 
     save() {
-        this.id = uuidv4().toString();
 
         getItemsFromFile(news => {
-            news.push(this);
-            fs.writeFile(p, JSON.stringify(news), err => {
-                console.log(err);
-            });
+            if(this.id) {
+                const newsItemIndex = news.findIndex(item => item.id === this.id);
+                const newNewsList = [...news];
+                newNewsList[newsItemIndex] = this;
+                fs.writeFile(p, JSON.stringify(newNewsList), err => {
+                    console.log(err);
+                });
+            } else {
+                this.id = uuidv4().toString();
+                news.push(this);
+                fs.writeFile(p, JSON.stringify(news), err => {
+                    console.log(err);
+                });
+            }
         });
     }
 

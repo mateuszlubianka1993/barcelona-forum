@@ -12,7 +12,7 @@
                 <div><%= newsItem.description %></div>
                 <div><%= newsItem.content %></div>
                 <div>
-                    <button>Edit</button>
+                    <button><a href="/admin/edit-news/<%=newsItem.id%>?edit=true">Edit</a></button>
                     <button>Delete</button>
                 </div>
             <% } %>
