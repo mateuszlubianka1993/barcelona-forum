@@ -1,0 +1,16 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <h1>Hello on the admin News List!</h1>
+        <% if (news.length > 0) { %>
+            <h2>News list</h2>
+            <% for (let newsItem of news) { %>
+                <div><%= newsItem.title %></div>
+            <% } %>
+        <% } else { %>
+            <h2>There are not any news.</h2>
+        <% } %>
+    </main>
+    <%- include('../includes/end.ejs') %>

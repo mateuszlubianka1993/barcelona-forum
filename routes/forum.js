@@ -2,10 +2,11 @@ const path = require('path');
 
 const express = require('express');
 
-const newsController = require('../controllers/news');
+const forumController = require('../controllers/forum');
 
 const router = express.Router();
 
-router.get('/', newsController.getHome);
+router.get('/', forumController.getHome);
+router.get('/news-list', forumController.getNewsList);
 
 module.exports = router;

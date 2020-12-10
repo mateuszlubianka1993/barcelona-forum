@@ -1,7 +1,7 @@
 const News = require('../models/news');
 
 exports.getAddNews = (req, res, next) => {
-    res.render('add-news', {
+    res.render('admin/add-news', {
         pageTitle: 'Forum Add News Page',
         path: '/admin/add-news',
     });
@@ -14,12 +14,12 @@ exports.postAddNews = (req, res, next) => {
     res.redirect('/');
 }
 
-exports.getHome = (req, res, next) => {   
+exports.getNewsList = (req, res, next) => {
     News.fetchAll(news => {
-        res.render('home', {
-            pageTitle: 'Forum Home Page',
+        res.render('admin/news-list', {
+            pageTitle: 'Admin News List',
             news: news,
-            path: '/',
+            path: '/admin/news-list',
             hasNews: news.length > 0,
         });
     });
