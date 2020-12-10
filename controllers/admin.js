@@ -64,3 +64,10 @@ exports.postEditNews = (req, res, next) => {
 
     res.redirect('/admin/news-list');
 }
+
+exports.postDeleteNews = (req, res, next) => {
+    const newsId = req.body.newsId;
+    News.deleteByID(newsId);
+
+    res.redirect('/admin/news-list');
+}

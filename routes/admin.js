@@ -11,5 +11,6 @@ router.post('/add-news', adminController.postAddNews);
 router.get('/news-list', adminController.getNewsList);
 router.get('/edit-news/:newsId', adminController.getEditNews);
 router.post('/edit-news', adminController.postEditNews);
+router.post('/delete-news', adminController.postDeleteNews);
 
 module.exports = router;

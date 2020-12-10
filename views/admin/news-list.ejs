@@ -13,7 +13,10 @@
                 <div><%= newsItem.content %></div>
                 <div>
                     <button><a href="/admin/edit-news/<%=newsItem.id%>?edit=true">Edit</a></button>
-                    <button>Delete</button>
+                    <form action="/admin/delete-news" method="POST">
+                        <input type="hidden" name="newsId" value="<%=newsItem.id%>">
+                        <button type="submit">Delete</button>
+                    </form>
                 </div>
             <% } %>
         <% } else { %>

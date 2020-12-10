@@ -55,4 +55,13 @@ module.exports = class News {
             callback(newsItem);
         });
     }
+
+    static deleteByID(id) {
+        getItemsFromFile(news => {
+            const newNewsList = news.filter(item => item.id !== id);
+            fs.writeFile(p, JSON.stringify(newNewsList), err => {
+                console.log(err);
+            });
+        });
+    }
 }
