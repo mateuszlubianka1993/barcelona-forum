@@ -21,3 +21,13 @@ exports.getNewsList = (req, res, next) => {
         });
     });
 }
+
+exports.getNewsItem = (req, res, next) => {
+    const newsId = req.params.newsId;
+    News.findById(newsId, newsItem => {
+        res.render('forum/news', {
+            newsItem: newsItem,
+            pageTitle: 'News Page'
+        });
+    });
+}

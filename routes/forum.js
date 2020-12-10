@@ -8,5 +8,6 @@ const router = express.Router();
 
 router.get('/', forumController.getHome);
 router.get('/news-list', forumController.getNewsList);
+router.get('/news-list/:newsId', forumController.getNewsItem);
 
 module.exports = router;

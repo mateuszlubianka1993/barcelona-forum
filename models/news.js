@@ -1,7 +1,20 @@
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 
 const rootDir = require('../utils/path');''
+
+const p = path.join(rootDir, 'data', 'news.json');
+
+const getItemsFromFile = (callback) => {
+    fs.readFile(p, (err, data) => {
+        if(err) {
+            callback([]);
+        } else {
+            callback(JSON.parse(data));
+        }
+    });
+}
 
 module.exports = class News {
     constructor(title, imageUrl, description, content) {
@@ -12,12 +25,9 @@ module.exports = class News {
     }
 
     save() {
-        const p = path.join(rootDir, 'data', 'news.json');
-        fs.readFile(p, (err, data) => {
-            let news = [];
-            if(!err) {
-                news = JSON.parse(data);
-            }
+        this.id = uuidv4().toString();
+
+        getItemsFromFile(news => {
             news.push(this);
             fs.writeFile(p, JSON.stringify(news), err => {
                 console.log(err);
@@ -26,12 +36,13 @@ module.exports = class News {
     }
 
     static fetchAll(callback) {
-        const p = path.join(rootDir, 'data', 'news.json');
-        fs.readFile(p, (err, data) => {
-            if(err) {
-                callback([]);
-            }
-            callback(JSON.parse(data));
+        getItemsFromFile(callback);
+    }
+
+    static findById(id, callback) {
+        getItemsFromFile(news => {
+            const newsItem = news.find(item => item.id === id);
+            callback(newsItem);
         });
     }
 }
