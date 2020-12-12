@@ -1,67 +1,64 @@
-const fs = require('fs');
-const path = require('path');
-const { v4: uuidv4 } = require('uuid');
+const mongodb = require('mongodb');
+const getDb = require('../utils/database').getDb;
 
-const rootDir = require('../utils/path');''
-
-const p = path.join(rootDir, 'data', 'news.json');
-
-const getItemsFromFile = (callback) => {
-    fs.readFile(p, (err, data) => {
-        if(err) {
-            callback([]);
-        } else {
-            callback(JSON.parse(data));
-        }
-    });
-}
-
-module.exports = class News {
-    constructor(id, title, imageUrl, description, content) {
-        this.id = id;
+class News  {
+    constructor(title, imageUrl, description, content, id) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;
         this.content = content;
-    }
+        this._id = id;
+    } 
 
     save() {
-
-        getItemsFromFile(news => {
-            if(this.id) {
-                const newsItemIndex = news.findIndex(item => item.id === this.id);
-                const newNewsList = [...news];
-                newNewsList[newsItemIndex] = this;
-                fs.writeFile(p, JSON.stringify(newNewsList), err => {
-                    console.log(err);
-                });
-            } else {
-                this.id = uuidv4().toString();
-                news.push(this);
-                fs.writeFile(p, JSON.stringify(news), err => {
-                    console.log(err);
-                });
-            }
+        const db = getDb();
+        let databaseAction;
+        if(this._id) {
+            databaseAction = db.collection('newsList').updateOne({
+                _id: new mongodb.ObjectID(this._id)
+            }, {
+                $set: this
+            })
+        } else {
+            databaseAction = db.collection('newsList').insertOne(this);
+        }
+        return databaseAction.then(result => {
+            console.log(result);
+        }).catch(err => {
+            console.log(err);
         });
     }
 
-    static fetchAll(callback) {
-        getItemsFromFile(callback);
+    static fetchAll() {
+        const db = getDb();
+        return db.collection('newsList').find().toArray().then(newsList => {
+            return newsList;
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
-    static findById(id, callback) {
-        getItemsFromFile(news => {
-            const newsItem = news.find(item => item.id === id);
-            callback(newsItem);
-        });
+    static findById(id) {
+        const db = getDb();
+        return db.collection('newsList').find({_id: new mongodb.ObjectID(id)}).next()
+        .then(newsItem => {
+            return newsItem;
+        })
+        .catch(err => {
+            console.log(err);
+        })      
     }
 
     static deleteByID(id) {
-        getItemsFromFile(news => {
-            const newNewsList = news.filter(item => item.id !== id);
-            fs.writeFile(p, JSON.stringify(newNewsList), err => {
-                console.log(err);
-            });
-        });
+        const db = getDb();
+        return db.collection('newsList').deleteOne({_id: new mongodb.ObjectID(id)})
+        .then(newsItem => {
+            console.log('Item deleted');
+        })
+        .catch(err => {
+            console.log(err);
+        })      
     }
 }
+
+module.exports = News;

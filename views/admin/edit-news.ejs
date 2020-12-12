@@ -45,7 +45,7 @@
                         ><%if(editing) {%><%=newsItem.content%><%}%></textarea>
                     </div>
                     <%if(editing) {%>
-                        <input type="hidden" name="newsId" value="<%=newsItem.id%>">
+                        <input type="hidden" name="newsId" value="<%=newsItem._id%>">
                     <%}%>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>

@@ -1,4 +1,6 @@
+const mongodb = require('mongodb');
 const News = require('../models/news');
+const objectId = mongodb.ObjectID;
 
 exports.getAddNews = (req, res, next) => {
     res.render('admin/edit-news', {
@@ -14,20 +16,25 @@ exports.postAddNews = (req, res, next) => {
     const description = req.body.description;
     const content = req.body.content;
 
-    const singleNews = new News(null, title, imageUrl, description, content);
-    singleNews.save();
-
-    res.redirect('/');
+    const singleNews = new News(title, imageUrl, description, content);
+    singleNews.save().then(result => {
+        console.log('Created news');
+        res.redirect('/admin/news-list');
+    }).catch(err => {
+        console.log(err);
+    });
 }
 
 exports.getNewsList = (req, res, next) => {
-    News.fetchAll(news => {
+    News.fetchAll().then(news => {
         res.render('admin/news-list', {
             pageTitle: 'Admin News List',
             news: news,
             path: '/admin/news-list',
             hasNews: news.length > 0,
         });
+    }).catch(err => {
+        console.log(err);
     });
 }
 
@@ -38,7 +45,7 @@ exports.getEditNews = (req, res, next) => {
     }
     
     const newsId = req.params.newsId;
-    News.findById(newsId, newsItem => {
+    News.findById(newsId).then(newsItem => {
         if(!newsItem) {
             return res.redirect('/');
         }
@@ -59,15 +66,21 @@ exports.postEditNews = (req, res, next) => {
     const updatedDescription = req.body.description;
     const updatedContent = req.body.content;
     
-    const updatedNews = new News(newsId, updatedTitle, updatedImageUrl, updatedDescription, updatedContent);
-    updatedNews.save();
-
-    res.redirect('/admin/news-list');
+    const updatedNews = new News(updatedTitle, updatedImageUrl, updatedDescription, updatedContent, new objectId(newsId));
+    updatedNews.save().then(result => {
+        res.redirect('/admin/news-list');
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }
 
 exports.postDeleteNews = (req, res, next) => {
     const newsId = req.body.newsId;
-    News.deleteByID(newsId);
-
-    res.redirect('/admin/news-list');
+    News.deleteByID(newsId).then(() => {
+        res.redirect('/admin/news-list');
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }

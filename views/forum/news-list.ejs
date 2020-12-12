@@ -11,7 +11,7 @@
                 <div><%= newsItem.imageUrl %></div>
                 <div><%= newsItem.description %></div>
                 <div><%= newsItem.content %></div>
-                <button><a href="/news-list/<%=newsItem.id%>">See news</a></button>
+                <button><a href="/news-list/<%=newsItem._id%>">See news</a></button>
             <% } %>
         <% } else { %>
             <h2>There are not any news.</h2>

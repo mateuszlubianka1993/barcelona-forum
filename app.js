@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
+const mongoConnect = require('./utils/database').mongoConnect;
 
 const app = express();
 
@@ -21,4 +22,6 @@ app.use(forumRoutes);
 
 app.use(errorController.get404Page);
 
-app.listen(3000);
+mongoConnect(() => {
+    app.listen(3000);
+});
