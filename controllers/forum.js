@@ -1,7 +1,8 @@
 const News = require('../models/news');
 
 exports.getHome = (req, res, next) => {   
-    News.fetchAll().then(news => {
+    News.find()
+    .then(news => {
         res.render('forum/home', {
             pageTitle: 'Forum Home Page',
             news: news,
@@ -14,7 +15,8 @@ exports.getHome = (req, res, next) => {
 }
 
 exports.getNewsList = (req, res, next) => {
-    News.fetchAll().then(news => {
+    News.find()
+    .then(news => {
         res.render('forum/news-list', {
             pageTitle: 'Forum News List',
             news: news,
@@ -28,7 +30,8 @@ exports.getNewsList = (req, res, next) => {
 
 exports.getNewsItem = (req, res, next) => {
     const newsId = req.params.newsId;
-    News.findById(newsId).then(newsItem => {
+    News.findById(newsId)
+    .then(newsItem => {
         res.render('forum/news', {
             newsItem: newsItem,
             pageTitle: 'News Page',
@@ -52,8 +55,11 @@ exports.postFavouriteNews = (req, res, next) => {
 }
 
 exports.getFavouriteNewsList = (req, res, next) => {
-    req.user.getFavouriteNewsList()
-    .then(items => {
+    req.user.populate('favouriteNews.items.newsId')
+    .execPopulate()
+    .then(user => {
+        const items = user.favouriteNews.items;
+        
         res.render('forum/favouriteNewsList', {
             path: '/user/favourite-news-list',
             pageTitle: 'Favourite News List',

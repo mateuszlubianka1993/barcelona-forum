@@ -1,10 +1,10 @@
 const path = require('path');
 
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
-const mongoConnect = require('./utils/database').mongoConnect;
 const User = require('./models/user');
 
 const app = express();
@@ -19,9 +19,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-    User.findById('5fd4c424782070bc5ddf6c33')
+    User.findById('5fd8cf32f5f4be1100bf7ef9')
     .then(user => {
-        req.user = new User(user.name, user.email, user.favouriteNews, user._id);
+        req.user = user;
         next();
     })
     .catch(err => {
@@ -34,6 +34,24 @@ app.use(forumRoutes);
 
 app.use(errorController.get404Page);
 
-mongoConnect(() => {
+mongoose.connect('mongodb+srv://xiedzu1503:mpJaGC9kRel7oPTF@cluster0.oqfff.mongodb.net/forum?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+.then(result => {
+    User.findOne()
+    .then(user => {
+        if(!user) {
+            const user = new User({
+                username: 'Xiedzu',
+                email: 'xiedzu@test.pl',
+                favouriteNews: {
+                    items: []
+                }
+            });
+            user.save();
+        }
+    })
+    
     app.listen(3000);
+})
+.catch(err => {
+    console.log(err);
 });

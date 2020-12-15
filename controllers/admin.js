@@ -1,6 +1,5 @@
 const mongodb = require('mongodb');
 const News = require('../models/news');
-const objectId = mongodb.ObjectID;
 
 exports.getAddNews = (req, res, next) => {
     res.render('admin/edit-news', {
@@ -16,9 +15,14 @@ exports.postAddNews = (req, res, next) => {
     const description = req.body.description;
     const content = req.body.content;
 
-    const singleNews = new News(title, imageUrl, description, content, null, req.user._id);
+    const singleNews = new News({
+        title: title, 
+        imageUrl: imageUrl, 
+        description: description, 
+        content: content,
+        userId: req.user
+    });
     singleNews.save().then(result => {
-        console.log('Created news');
         res.redirect('/admin/news-list');
     }).catch(err => {
         console.log(err);
@@ -26,7 +30,7 @@ exports.postAddNews = (req, res, next) => {
 }
 
 exports.getNewsList = (req, res, next) => {
-    News.fetchAll().then(news => {
+    News.find().then(news => {
         res.render('admin/news-list', {
             pageTitle: 'Admin News List',
             news: news,
@@ -66,8 +70,15 @@ exports.postEditNews = (req, res, next) => {
     const updatedDescription = req.body.description;
     const updatedContent = req.body.content;
     
-    const updatedNews = new News(updatedTitle, updatedImageUrl, updatedDescription, updatedContent, new objectId(newsId));
-    updatedNews.save().then(result => {
+    News.findById(newsId)
+    .then(news => {
+        news.title = updatedTitle;
+        news.imageUrl = updatedImageUrl;
+        news.description = updatedDescription;
+        news.content = updatedContent;
+        return news.save();
+    })
+    .then(result => {
         res.redirect('/admin/news-list');
     })
     .catch(err => {
@@ -77,7 +88,7 @@ exports.postEditNews = (req, res, next) => {
 
 exports.postDeleteNews = (req, res, next) => {
     const newsId = req.body.newsId;
-    News.deleteByID(newsId).then(() => {
+    News.findByIdAndRemove(newsId).then(() => {
         res.redirect('/admin/news-list');
     })
     .catch(err => {

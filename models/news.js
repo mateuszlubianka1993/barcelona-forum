@@ -1,65 +1,29 @@
-const mongodb = require('mongodb');
-const getDb = require('../utils/database').getDb;
+const mongoose = require('mongoose');
 
-class News  {
-    constructor(title, imageUrl, description, content, id, userId) {
-        this.title = title;
-        this.imageUrl = imageUrl;
-        this.description = description;
-        this.content = content;
-        this._id = id;
-        this.userId = userId;
-    } 
+const Schema = mongoose.Schema;
 
-    save() {
-        const db = getDb();
-        let databaseAction;
-        if(this._id) {
-            databaseAction = db.collection('newsList').updateOne({
-                _id: new mongodb.ObjectID(this._id)
-            }, {
-                $set: this
-            })
-        } else {
-            databaseAction = db.collection('newsList').insertOne(this);
-        }
-        return databaseAction.then(result => {
-            console.log(result);
-        }).catch(err => {
-            console.log(err);
-        });
+const newsSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    content: {
+        type: String,
+        required: true
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
+});
 
-    static fetchAll() {
-        const db = getDb();
-        return db.collection('newsList').find().toArray().then(newsList => {
-            return newsList;
-        }).catch(err => {
-            console.log(err);
-        });
-    }
-
-    static findById(id) {
-        const db = getDb();
-        return db.collection('newsList').find({_id: new mongodb.ObjectID(id)}).next()
-        .then(newsItem => {
-            return newsItem;
-        })
-        .catch(err => {
-            console.log(err);
-        })      
-    }
-
-    static deleteByID(id) {
-        const db = getDb();
-        return db.collection('newsList').deleteOne({_id: new mongodb.ObjectID(id)})
-        .then(newsItem => {
-            console.log('Item deleted');
-        })
-        .catch(err => {
-            console.log(err);
-        })      
-    }
-}
-
-module.exports = News;
+module.exports = mongoose.model('News', newsSchema)

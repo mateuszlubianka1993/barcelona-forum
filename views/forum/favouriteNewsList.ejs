@@ -7,12 +7,12 @@
         <% if (newsItems.length > 0) { %>
             <h2>News list</h2>
             <% for (let newsItem of newsItems) { %>
-                <div><%= newsItem.title %></div>
-                <div><%= newsItem.imageUrl %></div>
-                <div><%= newsItem.description %></div>
-                <div><%= newsItem.content %></div>
+                <div><%= newsItem.newsId.title %></div>
+                <div><%= newsItem.newsId.imageUrl %></div>
+                <div><%= newsItem.newsId.description %></div>
+                <div><%= newsItem.newsId.content %></div>
                 <form action="/delete-favourite-news" method="POST">
-                    <input type="hidden" name="newsId" value="<%=newsItem._id%>">
+                    <input type="hidden" name="newsId" value="<%=newsItem.newsId._id%>">
                     <button type="submit" class="btn btn-danger">Usuń z ulubionych</button>
                 </form>
             <% } %>
