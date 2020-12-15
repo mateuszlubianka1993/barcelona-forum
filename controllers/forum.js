@@ -36,3 +36,42 @@ exports.getNewsItem = (req, res, next) => {
         });
     });
 }
+
+exports.postFavouriteNews = (req, res, next) => {
+    const newsId = req.body.newsId;
+    News.findById(newsId)
+    .then(newsItem => {
+        return req.user.addNewsToFavourites(newsItem);
+    })
+    .then(() => {
+        res.redirect('/user/favourite-news-list');
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
+exports.getFavouriteNewsList = (req, res, next) => {
+    req.user.getFavouriteNewsList()
+    .then(items => {
+        res.render('forum/favouriteNewsList', {
+            path: '/user/favourite-news-list',
+            pageTitle: 'Favourite News List',
+            newsItems: items
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
+exports.postDeleteFavouriteItem = (req, res, next) => {
+    const newsId = req.body.newsId;
+    req.user.deleteFavouriteItem(newsId)
+    .then(result => {
+        res.redirect('/user/favourite-news-list');
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}

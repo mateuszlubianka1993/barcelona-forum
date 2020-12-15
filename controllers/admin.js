@@ -16,7 +16,7 @@ exports.postAddNews = (req, res, next) => {
     const description = req.body.description;
     const content = req.body.content;
 
-    const singleNews = new News(title, imageUrl, description, content);
+    const singleNews = new News(title, imageUrl, description, content, null, req.user._id);
     singleNews.save().then(result => {
         console.log('Created news');
         res.redirect('/admin/news-list');

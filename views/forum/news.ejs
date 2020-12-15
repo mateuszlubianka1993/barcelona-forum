@@ -7,6 +7,10 @@
         <div><%= newsItem.title %></div>
         <div><%= newsItem.imageUrl %></div>
         <div><%= newsItem.description %></div>
-        <div><%= newsItem.content %></div>                         
+        <div><%= newsItem.content %></div>     
+        <form action="/favouriteNewsList" method="post">
+            <button type="submit" class="btn btn-primary">Dodaj do ulubionych</button>
+            <input type="hidden" name="newsId" value="<%=newsItem._id%>">
+        </form>                    
     </main>
     <%- include('../includes/end.ejs') %>

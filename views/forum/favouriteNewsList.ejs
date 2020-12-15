@@ -1,0 +1,23 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <h1>Hello on the user fovourites news list!</h1>
+        <% if (newsItems.length > 0) { %>
+            <h2>News list</h2>
+            <% for (let newsItem of newsItems) { %>
+                <div><%= newsItem.title %></div>
+                <div><%= newsItem.imageUrl %></div>
+                <div><%= newsItem.description %></div>
+                <div><%= newsItem.content %></div>
+                <form action="/delete-favourite-news" method="POST">
+                    <input type="hidden" name="newsId" value="<%=newsItem._id%>">
+                    <button type="submit" class="btn btn-danger">Usuń z ulubionych</button>
+                </form>
+            <% } %>
+        <% } else { %>
+            <h2>There are not any news.</h2>
+        <% } %>
+    </main>
+    <%- include('../includes/end.ejs') %></body>
