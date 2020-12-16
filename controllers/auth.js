@@ -29,3 +29,15 @@ exports.postLogout = (req, res) => {
 		res.redirect('/');
 	});
 };
+
+exports.getSignUp = (req, res) => {
+	res.render('auth/signup', {
+		path: '/signup',
+		pageTitle: 'Signup Page',
+		isAuth: false
+	});
+};
+
+exports.postSignUp = () => {
+
+};
