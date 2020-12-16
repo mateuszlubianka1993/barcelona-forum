@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDbStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
+const connectFlash = require('connect-flash');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -29,8 +30,14 @@ const authRoutes = require('./routes/auth');
 app.use(bodyParser.urlencoded({extended: false}));
 const dirname = path.resolve();
 app.use(express.static(path.join(dirname, 'public')));
-app.use(session({secret: 'my secret', resave: false, saveUninitialized: false, store: store}));
+app.use(session({
+	secret: 'my secret', 
+	resave: false, 
+	saveUninitialized: false, 
+	store: store
+}));
 app.use(csurfProtect);
+app.use(connectFlash());
 
 app.use((req, res, next) => {
 	if(!req.session.user) {
