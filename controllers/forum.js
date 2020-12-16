@@ -8,7 +8,7 @@ exports.getHome = (req, res) => {
 				news: news,
 				path: '/',
 				hasNews: news.length > 0,
-				isAuth: req.isLoggedIn
+				isAuth: req.session.isLoggedIn
 			});
 		}).catch(err => {
 			console.log(err);
@@ -23,7 +23,7 @@ exports.getNewsList = (req, res) => {
 				news: news,
 				path: '/news-list',
 				hasNews: news.length > 0,
-				isAuth: req.isLoggedIn
+				isAuth: req.session.isLoggedIn
 			});
 		}).catch(err => {
 			console.log(err);
@@ -38,7 +38,7 @@ exports.getNewsItem = (req, res) => {
 				newsItem: newsItem,
 				pageTitle: 'News Page',
 				path: '/news-list',
-				isAuth: req.isLoggedIn
+				isAuth: req.session.isLoggedIn
 			});
 		});
 };
@@ -67,7 +67,7 @@ exports.getFavouriteNewsList = (req, res) => {
 				path: '/user/favourite-news-list',
 				pageTitle: 'Favourite News List',
 				newsItems: items,
-				isAuth: req.isLoggedIn
+				isAuth: req.session.isLoggedIn
 			});
 		})
 		.catch(err => {

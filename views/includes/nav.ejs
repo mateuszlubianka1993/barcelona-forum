@@ -24,10 +24,16 @@
                 <a class="nav-link <%= path === '/user/favourite-news-list' ? 'active' : '' %>" href="/user/favourite-news-list">User favourite news</a>
               </li>
               <%}%>
-              <li class="nav-item">
-                <a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
-              </li>
             </ul>
+            <%if(!isAuth) {%>
+            <div class="form-inline my-2 my-lg-0 mx-2">
+              <a href="/login" class="btn btn-outline-success my-2 my-sm-0">Login</a>
+            </div>
+            <%} else {%>
+            <form action="/logout" method="post" class="form-inline my-2 my-lg-0">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+            <%}%>
           </div>
         </div>
       </nav>
