@@ -8,7 +8,14 @@
     "start": "nodemon app.js",
     "start-server": "node app.js",
     "lint": "eslint **/*.js --ignore-pattern node_modules/",
-    "lint:fix": "eslint --fix --ext .js,.jsx ."
+    "lint:fix": "eslint --fix --ext .js,.jsx .",
+    "lint-all": "npm run lint && npm run lint:fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-all",
+      "pre-push": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -22,6 +29,7 @@
   "homepage": "https://github.com/mateuszlubianka1993/barcelona-forum#readme",
   "devDependencies": {
     "eslint": "^7.15.0",
+    "husky": "^4.3.6",
     "nodemon": "^2.0.6"
   },
   "dependencies": {
