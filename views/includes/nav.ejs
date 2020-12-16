@@ -13,6 +13,7 @@
               <li class="nav-item">
                 <a class="nav-link <%= path === '/news-list' ? 'active' : '' %>" href="/news-list">News list</a>
               </li>
+              <%if(isAuth) {%>
               <li class="nav-item">
                 <a class="nav-link <%= path === '/admin/add-news' ? 'active' : '' %>" href="/admin/add-news">Add news</a>
               </li>
@@ -21,6 +22,10 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link <%= path === '/user/favourite-news-list' ? 'active' : '' %>" href="/user/favourite-news-list">User favourite news</a>
+              </li>
+              <%}%>
+              <li class="nav-item">
+                <a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a>
               </li>
             </ul>
           </div>
