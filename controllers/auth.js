@@ -1,6 +1,14 @@
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 const User = require('../models/user');
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+	auth: {
+		api_key: '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'
+	}
+}));
 
 exports.getLogin = (req, res) => {
 	res.render('auth/login', {
@@ -80,6 +88,15 @@ exports.postSignUp = (req, res) => {
 			})
 				.then(() => {
 					res.redirect('/login');
+					return transporter.sendMail({
+						to: email,
+						from: 'lubiankamateusz@gmail.com',
+						subject: 'Successful registration.',
+						html: '<h1>Your account on the Barcelona Forum portal has been created!</h1>'
+					})
+						.catch(err => {
+							console.log(err);
+						});
 				});
 		})
 		.catch(err => {
