@@ -11,14 +11,29 @@ exports.getLogin = (req, res) => {
 };
 
 exports.postLogin = (req, res) => {
-	User.findById('5fd8cf32f5f4be1100bf7ef9')
+	const email = req.body.email;
+	const password = req.body.password;
+	User.findOne({email: email})
 		.then(user => {
-			req.session.isLoggedIn = true;
-			req.session.user = user;
-			req.session.save(err => {
-				console.log(err);
-				res.redirect('/');
-			});
+			if(!user) {
+				return res.redirect('login');
+			}
+			bcrypt.compare(password, user.password)
+				.then(correct => {
+					if(correct) {
+						req.session.isLoggedIn = true;
+						req.session.user = user;
+						return req.session.save(err => {
+							console.log(err);
+							res.redirect('/');
+						});
+					}
+					res.redirect('/login');
+				})
+				.catch(err => {
+					console.log(err);
+					res.redirect('/login');
+				});
 		})
 		.catch(err => {
 			console.log(err);
