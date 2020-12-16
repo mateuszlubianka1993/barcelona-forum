@@ -4,8 +4,7 @@ exports.getAddNews = (req, res) => {
 	res.render('admin/edit-news', {
 		pageTitle: 'Forum Add News Page',
 		path: '/admin/add-news',
-		editing: false,
-		isAuth: req.session.isLoggedIn
+		editing: false
 	});
 };
 
@@ -35,8 +34,7 @@ exports.getNewsList = (req, res) => {
 			pageTitle: 'Admin News List',
 			news: news,
 			path: '/admin/news-list',
-			hasNews: news.length > 0,
-			isAuth: req.session.isLoggedIn
+			hasNews: news.length > 0
 		});
 	}).catch(err => {
 		console.log(err);
@@ -59,8 +57,7 @@ exports.getEditNews = (req, res) => {
 			pageTitle: 'Forum Edit News Page',
 			path: '/admin/edit-news',
 			editing: edit,
-			newsItem: newsItem,
-			isAuth: req.session.isLoggedIn
+			newsItem: newsItem
 		});
 	});
 };

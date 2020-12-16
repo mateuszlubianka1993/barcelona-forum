@@ -47,6 +47,7 @@
                     <%if(editing) {%>
                         <input type="hidden" name="newsId" value="<%=newsItem._id%>">
                     <%}%>
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
             </div>

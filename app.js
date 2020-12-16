@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDbStore = require('connect-mongodb-session')(session);
+const csurf = require('csurf');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -16,6 +17,7 @@ const store = new MongoDbStore({
 	uri: MONGODB_URI,
 	collection: 'sessions'
 });
+const csurfProtect = csurf();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -28,6 +30,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 const dirname = path.resolve();
 app.use(express.static(path.join(dirname, 'public')));
 app.use(session({secret: 'my secret', resave: false, saveUninitialized: false, store: store}));
+app.use(csurfProtect);
 
 app.use((req, res, next) => {
 	if(!req.session.user) {
@@ -44,7 +47,10 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-	User.findById('5fd8cf32f5f4be1100bf7ef9')
+	if(!req.session.user) {
+		return next();
+	}
+	User.findById(req.session.user._id)
 		.then(user => {
 			req.user = user;
 			next();
@@ -52,6 +58,12 @@ app.use((req, res, next) => {
 		.catch(err => {
 			console.log(err);
 		});
+});
+
+app.use((req, res, next) => {
+	res.locals.isAuth = req.session.isLoggedIn;
+	res.locals.csrfToken = req.csrfToken();
+	next();
 });
 
 app.use('/admin', adminRoutes);

@@ -14,6 +14,7 @@
                 <div>
                     <button><a href="/admin/edit-news/<%=newsItem._id%>?edit=true">Edit</a></button>
                     <form action="/admin/delete-news" method="POST">
+                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                         <input type="hidden" name="newsId" value="<%=newsItem._id%>">
                         <button type="submit">Delete</button>
                     </form>

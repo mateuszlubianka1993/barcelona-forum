@@ -7,8 +7,7 @@ exports.getHome = (req, res) => {
 				pageTitle: 'Forum Home Page',
 				news: news,
 				path: '/',
-				hasNews: news.length > 0,
-				isAuth: req.session.isLoggedIn
+				hasNews: news.length > 0
 			});
 		}).catch(err => {
 			console.log(err);
@@ -22,8 +21,7 @@ exports.getNewsList = (req, res) => {
 				pageTitle: 'Forum News List',
 				news: news,
 				path: '/news-list',
-				hasNews: news.length > 0,
-				isAuth: req.session.isLoggedIn
+				hasNews: news.length > 0
 			});
 		}).catch(err => {
 			console.log(err);
@@ -37,8 +35,7 @@ exports.getNewsItem = (req, res) => {
 			res.render('forum/news', {
 				newsItem: newsItem,
 				pageTitle: 'News Page',
-				path: '/news-list',
-				isAuth: req.session.isLoggedIn
+				path: '/news-list'
 			});
 		});
 };
@@ -66,8 +63,7 @@ exports.getFavouriteNewsList = (req, res) => {
 			res.render('forum/favouriteNewsList', {
 				path: '/user/favourite-news-list',
 				pageTitle: 'Favourite News List',
-				newsItems: items,
-				isAuth: req.session.isLoggedIn
+				newsItems: items
 			});
 		})
 		.catch(err => {

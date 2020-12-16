@@ -13,6 +13,7 @@
                 <div><%= newsItem.newsId.content %></div>
                 <form action="/delete-favourite-news" method="POST">
                     <input type="hidden" name="newsId" value="<%=newsItem.newsId._id%>">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                     <button type="submit" class="btn btn-danger">Usuń z ulubionych</button>
                 </form>
             <% } %>
