@@ -62,20 +62,6 @@ app.use(errorController.get404Page);
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 	.then(() => {
-		User.findOne()
-			.then(user => {
-				if(!user) {
-					const user = new User({
-						username: 'Xiedzu',
-						email: 'xiedzu@test.pl',
-						favouriteNews: {
-							items: []
-						}
-					});
-					user.save();
-				}
-			});
-    
 		app.listen(3000);
 	})
 	.catch(err => {
