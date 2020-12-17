@@ -29,16 +29,17 @@ exports.postAddNews = (req, res) => {
 };
 
 exports.getNewsList = (req, res) => {
-	News.find().then(news => {
-		res.render('admin/news-list', {
-			pageTitle: 'Admin News List',
-			news: news,
-			path: '/admin/news-list',
-			hasNews: news.length > 0
+	News.find({userId: req.user._id})
+		.then(news => {
+			res.render('admin/news-list', {
+				pageTitle: 'Admin News List',
+				news: news,
+				path: '/admin/news-list',
+				hasNews: news.length > 0
+			});
+		}).catch(err => {
+			console.log(err);
 		});
-	}).catch(err => {
-		console.log(err);
-	});
 };
 
 exports.getEditNews = (req, res) => {
@@ -71,14 +72,17 @@ exports.postEditNews = (req, res) => {
     
 	News.findById(newsId)
 		.then(news => {
+			if(news.userId.toString() !== req.user._id.toString()) {
+				return res.redirect('/');
+			}
 			news.title = updatedTitle;
 			news.imageUrl = updatedImageUrl;
 			news.description = updatedDescription;
 			news.content = updatedContent;
-			return news.save();
-		})
-		.then(() => {
-			res.redirect('/admin/news-list');
+			return news.save()
+				.then(() => {
+					res.redirect('/admin/news-list');
+				});
 		})
 		.catch(err => {
 			console.log(err);
@@ -87,9 +91,10 @@ exports.postEditNews = (req, res) => {
 
 exports.postDeleteNews = (req, res) => {
 	const newsId = req.body.newsId;
-	News.findByIdAndRemove(newsId).then(() => {
-		res.redirect('/admin/news-list');
-	})
+	News.deleteOne({_id: newsId, userId: req.user._id})
+		.then(() => {
+			res.redirect('/admin/news-list');
+		})
 		.catch(err => {
 			console.log(err);
 		});
