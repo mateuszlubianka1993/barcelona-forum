@@ -17,13 +17,24 @@ exports.getLogin = (req, res) => {
 	res.render('auth/login', {
 		path: '/login',
 		pageTitle: 'Login Page',
-		errorMessage: req.flash('errorMessage')
+		errorMessage: req.flash('errorMessage'),
+		userInput: {email: '', password: '', username: ''}
 	});
 };
 
 exports.postLogin = (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
+	const errors = validationResult(req);
+
+	if(!errors.isEmpty()) {
+		return res.status(422).render('auth/login', {
+			path: '/login',
+			pageTitle: 'Login Page',
+			signupEmailError: errors.array()[0].msg,
+			userInput: {email: email, password: password}
+		});
+	}
 	User.findOne({email: email})
 		.then(user => {
 			if(!user) {

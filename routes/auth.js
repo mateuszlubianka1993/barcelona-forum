@@ -6,12 +6,15 @@ const authController = require('../controllers/auth');
 const router = express.Router();
 
 router.get('/login', authController.getLogin);
-router.post('/login', authController.postLogin);
+router.post('/login', 
+	[
+		check('email').isEmail().withMessage('Incorrect e-mail. Enter the correct one.').normalizeEmail(), 
+	], authController.postLogin);
 router.post('/logout', authController.postLogout);
 router.get('/signup', authController.getSignUp);
 router.post('/signup', 
 	[
-		check('email').isEmail().withMessage('Incorrect e-mail. Enter the correct one.'),
+		check('email').isEmail().withMessage('Incorrect e-mail. Enter the correct one.').normalizeEmail(),
 		body('password', 'Please enter a password of at least 8 characters.').isLength({min: 8}),
 		body('confirmPassword').custom((value, {req}) => {
 			if(value !== req.body.password) {

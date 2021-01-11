@@ -19,6 +19,7 @@
                             type="email" 
                             class="form-control" 
                             id="email" placeholder="Email" 
+                            value="<%=userInput.email%>"
                         >
                     </div>
                     <div class="mb-3">
@@ -29,6 +30,7 @@
                             class="form-control" 
                             id="password" 
                             placeholder="Password"
+                            value="<%=userInput.password%>"
                         >
                     </div>
                     <input type="hidden" name="_csrf" value="<%=csrfToken%>">
