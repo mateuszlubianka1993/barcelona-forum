@@ -1,4 +1,5 @@
 const News = require('../models/news');
+const deleteFile = require('../utils/file');
 
 exports.getAddNews = (req, res) => {
 	res.render('admin/edit-news', {
@@ -10,9 +11,19 @@ exports.getAddNews = (req, res) => {
 
 exports.postAddNews = (req, res) => {
 	const title = req.body.title;
-	const imageUrl = req.body.imageUrl;
+	const image = req.file;
 	const description = req.body.description;
 	const content = req.body.content;
+	
+	if(!image) {
+		return res.status(422).render('admin/edit-news', {
+			pageTitle: 'Forum Add News Page',
+			path: '/admin/add-news',
+			editing: false
+		});
+	}
+
+	const imageUrl = image.path;
 
 	const singleNews = new News({
 		title: title, 
@@ -66,7 +77,7 @@ exports.getEditNews = (req, res) => {
 exports.postEditNews = (req, res) => {
 	const newsId = req.body.newsId;
 	const updatedTitle = req.body.title;
-	const updatedImageUrl = req.body.imageUrl;
+	const image = req.file;
 	const updatedDescription = req.body.description;
 	const updatedContent = req.body.content;
     
@@ -76,7 +87,10 @@ exports.postEditNews = (req, res) => {
 				return res.redirect('/');
 			}
 			news.title = updatedTitle;
-			news.imageUrl = updatedImageUrl;
+			if(image) {
+				deleteFile(news.imageUrl);
+				news.imageUrl = image.path;
+			}
 			news.description = updatedDescription;
 			news.content = updatedContent;
 			return news.save()
@@ -91,7 +105,14 @@ exports.postEditNews = (req, res) => {
 
 exports.postDeleteNews = (req, res) => {
 	const newsId = req.body.newsId;
-	News.deleteOne({_id: newsId, userId: req.user._id})
+	News.findById(newsId).then(news => {
+		if(!news) {
+			console.log('Can not find news.');
+			return;
+		}
+		deleteFile(news.imageUrl);
+		return News.deleteOne({_id: newsId, userId: req.user._id});
+	})
 		.then(() => {
 			res.redirect('/admin/news-list');
 		})

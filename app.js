@@ -7,6 +7,8 @@ const session = require('express-session');
 const MongoDbStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
 const connectFlash = require('connect-flash');
+const multer = require('multer');
+const {v4} = require('uuid');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -27,9 +29,30 @@ const adminRoutes = require('./routes/admin');
 const forumRoutes = require('./routes/forum');
 const authRoutes = require('./routes/auth');
 
+const fileStore = multer.diskStorage({
+	destination: (req, file, callback) => {
+		callback(null, 'images');
+	},
+	filename: (req, file, callback) => {
+		callback(null, v4() + '-' + file.originalname);
+	}
+});
+
+const fileFilter = (req, file, callback) => {
+	if(file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+		callback(null, true);
+	} else {
+		callback(null, false);
+	}
+};
+
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(multer({storage: fileStore, fileFilter: fileFilter}).single('image'));
+
 const dirname = path.resolve();
 app.use(express.static(path.join(dirname, 'public')));
+app.use('/images', express.static(path.join(dirname, 'images')));
+
 app.use(session({
 	secret: 'my secret', 
 	resave: false, 

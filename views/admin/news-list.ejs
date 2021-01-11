@@ -8,6 +8,7 @@
             <h2>News list</h2>
             <% for (let newsItem of news) { %>
                 <div><%= newsItem.title %></div>
+                <img src="/<%=newsItem.imageUrl %>" alt="News Image">
                 <div><%= newsItem.imageUrl %></div>
                 <div><%= newsItem.description %></div>
                 <div><%= newsItem.content %></div>

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <h1 class="text-center mb-4 mt-4"><%= editing ? 'Edit news' : 'Add new news'%></h1>
-                <form class="col-10 col-md-8" action="/admin/<%if(editing) {%>edit-news<%} else {%>add-news<%}%>" method="POST">
+                <form class="col-10 col-md-8" action="/admin/<%if(editing) {%>edit-news<%} else {%>add-news<%}%>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="title">Title</label>
                         <input 
@@ -17,7 +17,7 @@
                             value="<%if(editing) {%><%=newsItem.title%><%}%>"
                         >
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="imageUrl">Image Url</label>
                         <input 
                             name="imageUrl" 
@@ -27,6 +27,10 @@
                             placeholder="Image Url"
                             value="<%if(editing) {%><%=newsItem.imageUrl%><%}%>"
                         >
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="image" class="form-label">News image</label>
+                        <input class="form-control" type="file" id="image" name="image">
                     </div>
                     <div class="mb-3">
                         <label for="description">Description</label>
