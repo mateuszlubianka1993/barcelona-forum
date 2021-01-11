@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const {validationResult} = require('express-validator');
 
 const User = require('../models/user');
 
@@ -63,7 +64,8 @@ exports.getSignUp = (req, res) => {
 	res.render('auth/signup', {
 		path: '/signup',
 		pageTitle: 'Signup Page',
-		signupEmailError: req.flash('signupEmailError')
+		signupEmailError: req.flash('signupEmailError'),
+		userInput: {email: '', password: '', username: ''}
 	});
 };
 
@@ -71,7 +73,16 @@ exports.postSignUp = (req, res) => {
 	const username = req.body.username;
 	const email = req.body.email;
 	const password = req.body.password;
-	// const confirmPassword = req.body.confirmPassword;
+	const errors = validationResult(req);
+
+	if(!errors.isEmpty()) {
+		return res.status(422).render('auth/signup', {
+			path: '/signup',
+			pageTitle: 'Signup Page',
+			signupEmailError: errors.array()[0].msg,
+			userInput: {email: email, password: password, username: username}
+		});
+	}
 
 	User.findOne({email: email})
 		.then(user => {

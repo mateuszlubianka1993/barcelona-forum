@@ -11,14 +11,15 @@
                         <%=signupEmailError%>
                     </div>
                 <%}%>
-                <form class="col-10 col-md-8" action="/signup" method="POST">
+                <form class="col-10 col-md-8" action="/signup" method="POST" novalidate>
                     <div class="mb-3">
                         <label for="username">User Name</label>
                         <input 
                             name="username" 
                             type="text" 
                             class="form-control" 
-                            id="username" placeholder="User Name" 
+                            id="username" placeholder="User Name"
+                            value="<%=userInput.username%>" 
                         >
                     </div>
                     <div class="mb-3">
@@ -27,7 +28,8 @@
                             name="email" 
                             type="email" 
                             class="form-control" 
-                            id="email" placeholder="Email" 
+                            id="email" placeholder="Email"
+                            value="<%=userInput.email%>"
                         >
                     </div>
                     <div class="mb-3">
@@ -38,6 +40,7 @@
                             class="form-control" 
                             id="password" 
                             placeholder="Password"
+                            value="<%=userInput.password%>"
                         >
                     </div>
                     <div class="mb-3">
