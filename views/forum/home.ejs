@@ -1,19 +1,46 @@
 <%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/home/home.css">
 </head>
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <h1>Hello on the forum Home Page!</h1>
-        <% if (news.length > 0) { %>
-            <h2>News list</h2>
-            <% for (let newsItem of news) { %>
-                <div><%= newsItem.title %></div>
-                <div><%= newsItem.imageUrl %></div>
-                <div><%= newsItem.description %></div>
-                <div><%= newsItem.content %></div>
+        <div class="container-fluid">
+            <% if (news.length > 0) { %>
+            <div class="row">
+                <div class="col-xs-12 nopadding">
+                    <a href="/news-list/<%=news[0]._id%>">
+                        <div class="main-news news">
+                            <img src="<%=news[0].imageUrl%>" class="img-fluid" alt="News Image">
+                            <div class="mask">
+                                <div class="content position-absolute top-50 start-50 translate-middle">
+                                    <h3><%=news[0].title%></h3>
+                                    <h4><%=news[0].description%></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                    <% for (let newsItem of news) { %>
+                        <div class="col-6 col-md-4 nopadding">
+                            <a href="/news-list/<%=newsItem._id%>">
+                                <div class="news">
+                                    <img src="<%=newsItem.imageUrl%>" class="img-fluid" alt="News Image">    
+                                    <div class="mask">
+                                        <div class="content position-absolute top-50 start-50 translate-middle">
+                                            <h5><%=newsItem.title%></h4>
+                                            <h6><%=newsItem.description%></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>    
+                        </div>
+                    <% } %>
+            </div>
+            <% } else { %>
+                <h2>There are not any news.</h2>
             <% } %>
-        <% } else { %>
-            <h2>There are not any news.</h2>
-        <% } %>
+        </div>
     </main>
     <%- include('../includes/end.ejs') %>
