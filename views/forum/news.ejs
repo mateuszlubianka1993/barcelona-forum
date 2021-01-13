@@ -9,7 +9,6 @@
               <h5 class="card-title"><%= newsItem.title %></h5>
               <h6 class="card-subtitle mb-2 text-muted"><%= newsItem.description %></h6>
               <p class="card-text"><%= newsItem.content %></p>
-              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
               <%if(isAuth) {%>    
                 <form action="/favouriteNewsList" method="post">
                     <input type="hidden" name="_csrf" value="<%=csrfToken%>">

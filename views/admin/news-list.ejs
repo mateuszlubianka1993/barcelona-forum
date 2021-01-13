@@ -3,24 +3,29 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <h1>Hello on the admin News List!</h1>
+        <h1 class="text-center mb-3 mt-3">Admin News List!</h1>
         <% if (news.length > 0) { %>
-            <h2>News list</h2>
+            <div class="container">
+                <div class="row">
             <% for (let newsItem of news) { %>
-                <div><%= newsItem.title %></div>
-                <img src="/<%=newsItem.imageUrl %>" alt="News Image">
-                <div><%= newsItem.imageUrl %></div>
-                <div><%= newsItem.description %></div>
-                <div><%= newsItem.content %></div>
-                <div>
-                    <button><a href="/admin/edit-news/<%=newsItem._id%>?edit=true">Edit</a></button>
-                    <form action="/admin/delete-news" method="POST">
-                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                        <input type="hidden" name="newsId" value="<%=newsItem._id%>">
-                        <button type="submit">Delete</button>
-                    </form>
-                </div>
+                        <div class="col-xs-12 col-sm-4 col-md-3">
+                            <div class="card mb-3">
+                                <img src="/<%=newsItem.imageUrl %>" class="card-img-top" alt="News Image">
+                                <div class="card-body">
+                                  <h5 class="card-title"><%= newsItem.title %></h5>
+                                  <p class="card-text"><%= newsItem.description %></p>
+                                    <form action="/admin/delete-news" method="POST" class="d-grid gap-2">
+                                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                        <input type="hidden" name="newsId" value="<%=newsItem._id%>">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <a href="/admin/edit-news/<%=newsItem._id%>?edit=true" class="btn btn-primary">Edit</a>
+                                    </form>
+                                </div>
+                              </div>
+                        </div>
             <% } %>
+            </div>
+        </div>
         <% } else { %>
             <h2>There are not any news.</h2>
         <% } %>
