@@ -3,20 +3,29 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <h1>Hello on the user fovourites news list!</h1>
+        <h1 class="text-center mb-3 mt-3">Your fovourites news list!</h1>
         <% if (newsItems.length > 0) { %>
-            <h2>News list</h2>
-            <% for (let newsItem of newsItems) { %>
-                <div><%= newsItem.newsId.title %></div>
-                <div><%= newsItem.newsId.imageUrl %></div>
-                <div><%= newsItem.newsId.description %></div>
-                <div><%= newsItem.newsId.content %></div>
-                <form action="/delete-favourite-news" method="POST">
-                    <input type="hidden" name="newsId" value="<%=newsItem.newsId._id%>">
-                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                    <button type="submit" class="btn btn-danger">Usuń z ulubionych</button>
-                </form>
-            <% } %>
+            <div class="container">
+                <div class="row">
+                    <% for (let newsItem of newsItems) { %>
+                        <div class="col-xs-12 col-sm-4 col-md-3">
+                            <div class="card mb-3">
+                                <img src="/<%= newsItem.newsId.imageUrl %>" class="card-img-top" alt="News Image">
+                                <div class="card-body">
+                                  <h5 class="card-title"><%= newsItem.newsId.title %></h5>
+                                  <p class="card-text"><%= newsItem.newsId.description %></p>
+                                    <form action="/delete-favourite-news" method="POST" class="d-grid gap-2">
+                                        <input type="hidden" name="newsId" value="<%=newsItem.newsId._id%>">
+                                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                        <button type="submit" class="btn btn-danger">Usuń z ulubionych</button>
+                                        <a href="/news-list/<%=newsItem.newsId._id%>" class="btn btn-primary">Zobacz news</a>
+                                    </form>
+                                </div>
+                              </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
         <% } else { %>
             <h2>There are not any news.</h2>
         <% } %>
