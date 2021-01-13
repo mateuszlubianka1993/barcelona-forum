@@ -3,17 +3,27 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <h1>News View</h1>
-        <div><%= newsItem.title %></div>
-        <div><%= newsItem.imageUrl %></div>
-        <div><%= newsItem.description %></div>
-        <div><%= newsItem.content %></div>
-        <%if(isAuth) {%>    
-        <form action="/favouriteNewsList" method="post">
-            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-            <button type="submit" class="btn btn-primary">Dodaj do ulubionych</button>
-            <input type="hidden" name="newsId" value="<%=newsItem._id%>">
-        </form>
-        <%}%>                    
+        <div class="card">
+            <img src="/<%= newsItem.imageUrl %>" class="card-img-top" alt="News Image">
+            <div class="card-body">
+              <h5 class="card-title"><%= newsItem.title %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= newsItem.description %></h6>
+              <p class="card-text"><%= newsItem.content %></p>
+              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              <%if(isAuth) {%>    
+                <form action="/favouriteNewsList" method="post">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                    <button type="submit" class="btn btn-primary">Dodaj do ulubionych</button>
+                    <input type="hidden" name="newsId" value="<%=newsItem._id%>">
+                </form>
+            <%}%>
+            </div>
+        </div> 
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1">
+                Comments</span>
+            </div>
+        </nav>               
     </main>
     <%- include('../includes/end.ejs') %>
