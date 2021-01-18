@@ -88,3 +88,10 @@ exports.getHistory = (req, res) => {
 		path: '/club'
 	});
 };
+
+exports.getAnthem = (req, res) => {
+	res.render('forum/anthem', {
+		pageTitle: 'Club anthem',
+		path: '/anthem'
+	});
+};

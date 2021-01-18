@@ -12,5 +12,6 @@ router.post('/favouriteNewsList', isLogged, forumController.postFavouriteNews);
 router.get('/user/favourite-news-list', isLogged, forumController.getFavouriteNewsList);
 router.post('/delete-favourite-news', isLogged, forumController.postDeleteFavouriteItem);
 router.get('/history', forumController.getHistory);
+router.get('/anthem', forumController.getAnthem);
 
 module.exports = router;
