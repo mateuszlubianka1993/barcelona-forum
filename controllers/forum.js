@@ -32,11 +32,15 @@ exports.getNewsList = (req, res) => {
 exports.getNewsItem = (req, res) => {
 	const newsId = req.params.newsId;
 	News.findById(newsId)
-		.then(newsItem => {
+		.populate('comments')
+		.exec((err, newsItem) => {
+			const comments = newsItem.comments;
+			
 			res.render('forum/news', {
 				newsItem: newsItem,
 				pageTitle: 'News Page',
-				path: '/news-list'
+				path: '/news-list',
+				comments: comments
 			});
 		});
 };
@@ -111,12 +115,22 @@ exports.postAddComment = (req, res) => {
 	const singleComment = new Comment({
 		commentBody: commentBody,
 		newsId: newsId,
-		userId: req.user
+		userId: req.user,
+		author: req.user.username
 	});
 
-	singleComment.save().then(() => {
-		res.redirect(`/news-list/${newsId}`);
-	}).catch(err => {
-		console.log(err);
-	});
+	News.findById(newsId)
+		.then(newsItem => {
+			singleComment.save().then(() => {
+				return newsItem.addToComments(singleComment);
+			}).then(() => {
+				res.redirect(`/news-list/${newsId}`);
+			}).catch(err => {
+				console.log(err);
+			});
+		})
+		.catch(err => {
+			console.log(err);
+		});
+
 };

@@ -40,6 +40,22 @@
                     <button class="btn btn-primary" type="submit">Dodaj</button>
                 </form>
             <%}%>
+            <%if(comments && comments.length >= 1) {%>
+                <div class="comments mt-3">
+                    <% for (let comment of comments) { %>
+                        <div class="card m-auto mb-2">
+                            <div class="card-header bg-dark text-white">
+                              <%=comment.author%>
+                            </div>
+                            <div class="card-body">
+                              <blockquote class="blockquote mb-0">
+                                <p><%=comment.commentBody%></p>
+                              </blockquote>
+                            </div>
+                          </div>
+                    <%}%>  
+                </div>
+            <%}%>
         </div>               
     </main>
     <%- include('../includes/end.ejs') %>

@@ -23,7 +23,13 @@ const newsSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 		required: true
-	}
+	},
+	comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 });
+
+newsSchema.methods.addToComments = function(comment) {
+	this.comments.push(comment);
+	return this.save();
+};
 
 module.exports = mongoose.model('News', newsSchema);

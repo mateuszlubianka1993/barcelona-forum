@@ -16,6 +16,10 @@ const commentSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'News',
 		required: true
+	},
+	author: {
+		type: String,
+		required: true
 	}
 });
 
