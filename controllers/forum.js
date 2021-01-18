@@ -95,3 +95,10 @@ exports.getAnthem = (req, res) => {
 		path: '/anthem'
 	});
 };
+
+exports.getTrophies = (req, res) => {
+	res.render('forum/trophies', {
+		pageTitle: 'Club trophies',
+		path: '/trophies'
+	});
+};

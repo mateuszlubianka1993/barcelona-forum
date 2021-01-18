@@ -20,7 +20,7 @@
                 <ul class="dropdown-menu" aria-labelledby="clubMenuLink">
                   <li><a class="dropdown-item <%= path === '/club' ? 'active' : '' %>" href="/history">Historia</a></li>
                   <li><a class="dropdown-item <%= path === '/anthem' ? 'active' : '' %>" href="/anthem">Hymn</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item <%= path === '/trophies' ? 'active' : '' %>" href="/trophies">Trofea</a></li>
                 </ul>
               </li>
               <%if(isAuth) {%>
