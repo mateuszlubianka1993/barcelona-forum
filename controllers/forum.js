@@ -81,3 +81,10 @@ exports.postDeleteFavouriteItem = (req, res) => {
 			console.log(err);
 		});
 };
+
+exports.getHistory = (req, res) => {
+	res.render('forum/history', {
+		pageTitle: 'Club History',
+		path: '/club'
+	});
+};

@@ -13,6 +13,16 @@
               <li class="nav-item">
                 <a class="nav-link <%= path === '/news-list' ? 'active' : '' %>" href="/news-list">News list</a>
               </li>
+              <li class="nav-item dropdown <%= path === '/club' ? 'active' : '' %>">
+                <a class="nav-link dropdown-toggle" href="#" id="clubMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Klub
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="clubMenuLink">
+                  <li><a class="dropdown-item <%= path === '/club' ? 'active' : '' %>" href="/history">Historia</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
               <%if(isAuth) {%>
               <li class="nav-item">
                 <a class="nav-link <%= path === '/admin/add-news' ? 'active' : '' %>" href="/admin/add-news">Add news</a>
