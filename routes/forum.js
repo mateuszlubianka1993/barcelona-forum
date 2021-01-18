@@ -14,5 +14,6 @@ router.post('/delete-favourite-news', isLogged, forumController.postDeleteFavour
 router.get('/history', forumController.getHistory);
 router.get('/anthem', forumController.getAnthem);
 router.get('/trophies', forumController.getTrophies);
+router.post('/add-comment', isLogged, forumController.postAddComment);
 
 module.exports = router;

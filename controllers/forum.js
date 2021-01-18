@@ -1,4 +1,5 @@
 const News = require('../models/news');
+const Comment = require('../models/comment');
 
 exports.getHome = (req, res) => {   
 	News.find()
@@ -100,5 +101,22 @@ exports.getTrophies = (req, res) => {
 	res.render('forum/trophies', {
 		pageTitle: 'Club trophies',
 		path: '/trophies'
+	});
+};
+
+exports.postAddComment = (req, res) => {
+	const commentBody = req.body.commentBody;
+	const newsId = req.body.newsId;
+
+	const singleComment = new Comment({
+		commentBody: commentBody,
+		newsId: newsId,
+		userId: req.user
+	});
+
+	singleComment.save().then(() => {
+		res.redirect(`/news-list/${newsId}`);
+	}).catch(err => {
+		console.log(err);
 	});
 };

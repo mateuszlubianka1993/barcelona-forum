@@ -20,9 +20,26 @@
         </div> 
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
-              <span class="navbar-brand mb-0 h1">
-                Comments</span>
+              <h4><span class="navbar-brand mb-0 h1">
+                Comments</span></h4>
             </div>
-        </nav>               
+        </nav>
+        <div class="container position-relative pt-3 pb-3">
+            <%if(isAuth) {%>
+                <form class="col-10 col-md-8 m-auto" action="/add-comment" method="POST">
+                    <div class="mb-3">
+                        <label for="comment">Komentarz</label>
+                        <textarea 
+                            name="commentBody"
+                            class="form-control" 
+                            id="comment"
+                        ></textarea>
+                    </div>
+                    <input type="hidden" name="newsId" value="<%=newsItem._id%>">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                    <button class="btn btn-primary" type="submit">Dodaj</button>
+                </form>
+            <%}%>
+        </div>               
     </main>
     <%- include('../includes/end.ejs') %>
