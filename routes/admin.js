@@ -14,5 +14,6 @@ router.get('/edit-news/:newsId', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adm
 router.post('/edit-news', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adminController.postEditNews);
 router.post('/delete-news', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adminController.postDeleteNews);
 router.get('/users-list', isLogged, isPermit([ROLE.ADMIN]), adminController.getUsersList);
+router.post('/delete-user', isLogged, isPermit([ROLE.ADMIN]), adminController.postDeleteUser);
 
 module.exports = router;

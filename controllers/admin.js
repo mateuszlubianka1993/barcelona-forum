@@ -136,3 +136,21 @@ exports.getUsersList = (req, res) => {
 			console.log(err);
 		});
 };
+
+exports.postDeleteUser = (req, res) => {
+	const userID = req.body.userId;
+	User.findById(userID).then(user => {
+		if(!user) {
+			console.log('Can not find user.');
+			return;
+		}
+		// deleteFile(news.imageUrl);
+		return User.deleteOne({_id: userID});
+	})
+		.then(() => {
+			res.redirect('/admin/users-list');
+		})
+		.catch(err => {
+			console.log(err);
+		});
+};
