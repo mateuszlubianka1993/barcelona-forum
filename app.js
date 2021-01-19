@@ -13,6 +13,8 @@ const {v4} = require('uuid');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
+const {ROLE} = require('./utils/constants');
+
 const MONGODB_URI = 'mongodb+srv://xiedzu1503:mpJaGC9kRel7oPTF@cluster0.oqfff.mongodb.net/forum?retryWrites=true&w=majority';
 
 const app = express();
@@ -93,8 +95,13 @@ app.use((req, res, next) => {
 		});
 });
 
-app.use((req, res, next) => {
+app.use((req, res, next) => { 
 	res.locals.isAuth = req.session.isLoggedIn;
+	if(!req.session.isLoggedIn) {
+		res.locals.isAdminMod = false;
+	} else {
+		res.locals.isAdminMod = req.user.role === ROLE.ADMIN || req.user.role === ROLE.MOD ? true : false;
+	}
 	res.locals.csrfToken = req.csrfToken();
 	next();
 });

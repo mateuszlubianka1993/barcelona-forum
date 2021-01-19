@@ -23,7 +23,7 @@
                   <li><a class="dropdown-item <%= path === '/trophies' ? 'active' : '' %>" href="/trophies">Trofea</a></li>
                 </ul>
               </li>
-              <%if(isAuth) {%>
+              <%if(isAuth && isAdminMod) {%>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="adminMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Admin
@@ -33,6 +33,8 @@
                     <li><a class="dropdown-item <%= path === '/admin/news-list' ? 'active' : '' %>" href="/admin/news-list">Lista news'ów</a></li>
                   </ul>
                 </li>
+              <%}%>
+              <%if(isAuth) {%>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="adminMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-square"></i>
@@ -41,9 +43,6 @@
                     <li><a class="dropdown-item <%= path === '/user/favourite-news-list' ? 'active' : '' %>" href="/user/favourite-news-list">Ulubione newsy</a></li>
                   </ul>
                 </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link <%= path === '/user/favourite-news-list' ? 'active' : '' %>" href="/user/favourite-news-list">User favourite news</a>
-              </li> -->
               <%}%>
             </ul>
             <%if(!isAuth) {%>
