@@ -1,4 +1,6 @@
 const News = require('../models/news');
+const User = require('../models/user');
+
 const deleteFile = require('../utils/file');
 
 exports.getAddNews = (req, res) => {
@@ -118,6 +120,19 @@ exports.postDeleteNews = (req, res) => {
 			res.redirect('/admin/news-list');
 		})
 		.catch(err => {
+			console.log(err);
+		});
+};
+
+exports.getUsersList = (req, res) => {
+	User.find()
+		.then(users => {
+			res.render('admin/users-list', {
+				pageTitle: 'Admin Users List',
+				users: users,
+				path: '/admin/users-list'
+			});
+		}).catch(err => {
 			console.log(err);
 		});
 };

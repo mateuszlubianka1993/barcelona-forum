@@ -25,12 +25,22 @@
               </li>
               <%if(isAuth && isAdminMod) {%>
                 <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="modMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Moderator
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="modMenuLink">
+                    <li><a class="dropdown-item <%= path === '/admin/add-news' ? 'active' : '' %>" href="/admin/add-news">Dodaj news</a></li>
+                    <li><a class="dropdown-item <%= path === '/admin/news-list' ? 'active' : '' %>" href="/admin/news-list">Lista news'ów</a></li>
+                  </ul>
+                </li>
+              <%}%>
+              <%if(isAuth && isAdmin) {%>
+                <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="adminMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Admin
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="adminMenuLink">
-                    <li><a class="dropdown-item <%= path === '/admin/add-news' ? 'active' : '' %>" href="/admin/add-news">Dodaj news</a></li>
-                    <li><a class="dropdown-item <%= path === '/admin/news-list' ? 'active' : '' %>" href="/admin/news-list">Lista news'ów</a></li>
+                    <li><a class="dropdown-item <%= path === '/admin/users-list' ? 'active' : '' %>" href="/admin/users-list">Użytkownicy</a></li>
                   </ul>
                 </li>
               <%}%>

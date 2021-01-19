@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <h1 class="text-center mb-5 mt-4">Lista użytkowników</h1>
+        <% if (users.length > 0) { %>
+            <div class="container-fluid">
+                    <ul class="list-group">
+                        <% for (let user of users) { %>
+                            <li class="list-group-item d-flex flex-row justify-content-between align-items-center flex-wrap">
+                                <div class="">
+                                    <input class="form-check-input me-1" type="checkbox" value="<%= user._id %>" aria-label="...">
+                                </div>
+                                <div class="flex-fill">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Nazwa użytkownika: <%= user.username %></h5>
+                                        <p class="card-text">Adres email: <%= user.email %></p>
+                                      </div>
+                                </div>
+                                <form action="/admin/delete-users" method="POST" class="d-grid gap-2">
+                                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                    <input type="hidden" name="usersId" value="<%=user._id%>">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <a href="/admin/edit-users/<%=user._id%>?edit=true" class="btn btn-primary">Edit</a>
+                                </form>
+                              </li>
+                        <% } %>    
+                    </ul>
+        </div>
+        <% } else { %>
+            <h2>There are not any users.</h2>
+        <% } %>
+    </main>
+    <%- include('../includes/end.ejs') %>

@@ -99,8 +99,10 @@ app.use((req, res, next) => {
 	res.locals.isAuth = req.session.isLoggedIn;
 	if(!req.session.isLoggedIn) {
 		res.locals.isAdminMod = false;
+		res.locals.isAdmin = false;
 	} else {
 		res.locals.isAdminMod = req.user.role === ROLE.ADMIN || req.user.role === ROLE.MOD ? true : false;
+		res.locals.isAdmin = req.user.role === ROLE.ADMIN ? true : false;
 	}
 	res.locals.csrfToken = req.csrfToken();
 	next();
