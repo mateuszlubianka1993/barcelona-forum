@@ -169,3 +169,20 @@ exports.getEditUser = (req, res) => {
 		});
 	});
 };
+
+exports.postEditUser = (req, res) => {
+	const userId = req.body.userId;
+	const updatedRole = req.body.role;
+    
+	User.findById(userId)
+		.then(user => {
+			user.role = updatedRole;
+			return user.save()
+				.then(() => {
+					res.redirect('/admin/users-list');
+				});
+		})
+		.catch(err => {
+			console.log(err);
+		});
+};
