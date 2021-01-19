@@ -21,8 +21,8 @@
                                 <form action="/admin/delete-user" method="POST" class="d-grid gap-2">
                                     <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                     <input type="hidden" name="userId" value="<%=user._id%>">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                    <a href="/admin/edit-users/<%=user._id%>?edit=true" class="btn btn-primary">Edit</a>
+                                    <button type="submit" class="btn btn-danger">Usuń</button>
+                                    <a href="/admin/edit-user/<%=user._id%>" class="btn btn-primary">Edytuj</a>
                                 </form>
                               </li>
                         <% } %>    

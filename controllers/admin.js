@@ -154,3 +154,18 @@ exports.postDeleteUser = (req, res) => {
 			console.log(err);
 		});
 };
+
+exports.getEditUser = (req, res) => {
+	const userId = req.params.userId;
+	User.findById(userId).then(userItem => {
+		if(!userItem) {
+			return res.redirect('/');
+		}
+
+		res.render('admin/edit-user', {
+			pageTitle: 'Forum Edit user Page',
+			path: '/admin/edit-user',
+			userItem: userItem
+		});
+	});
+};

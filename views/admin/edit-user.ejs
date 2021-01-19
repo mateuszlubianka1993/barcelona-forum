@@ -1,0 +1,59 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <h1 class="text-center mb-4 mt-4">Edytuj użytkownika</h1>
+                <form class="col-10 col-md-8" action="/admin/edit-user" method="POST">
+                    <div class="mb-3">
+                        <label for="username">User Name</label>
+                        <input 
+                             
+                            type="text" 
+                            class="form-control" 
+                            id="username" placeholder="User Name"
+                            value="<%=userItem.username%>"
+                            disabled 
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input 
+                            type="email" 
+                            class="form-control" 
+                            id="email" placeholder="Email"
+                            value="<%=userItem.email%>"
+                            disabled
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <h4>Role: <%=userItem.role%></h4>
+                        <div class="form-check form-switch">
+                            <% let checkedAdmin = userItem.role === 'admin' ? "checked" : "" %>
+                            <input class="form-check-input" type="radio" name="role" <%= checkedAdmin ? "checked" : "" %> value="admin" id="admin">
+                            <label class="form-check-label" for="admin">Admin</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <% let checkedMod = userItem.role === 'mod' ? "checked" : "" %>
+                            <input class="form-check-input" <%= checkedMod ? "checked" : "" %> type="radio" name="role" value="mod" id="mod">
+                            <label class="form-check-label" for="mod">Moderator</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <% let checkedUser = userItem.role === 'user' ? "checked" : "" %>
+                            <input class="form-check-input" <%= checkedUser ? "checked" : "" %> type="radio" name="role" value="user" id="user">
+                            <label class="form-check-label" for="user">Użytkownik</label>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" name="userId" value="<%=userItem._id%>">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                    <button class="btn btn-primary" type="submit">Zapisz zmiany</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="/js/vendor/ckeditor/ckeditor.js"></script>
+    <script src="/js/edit-news.js"></script>
+    <%- include('../includes/end.ejs') %>
