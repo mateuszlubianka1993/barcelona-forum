@@ -40,7 +40,8 @@ exports.postAddNews = (req, res) => {
 };
 
 exports.getNewsList = (req, res) => {
-	News.find({userId: req.user._id})
+	// News.find({userId: req.user._id})
+	News.find()
 		.then(news => {
 			res.render('admin/news-list', {
 				pageTitle: 'Admin News List',

@@ -7,11 +7,11 @@ const {ROLE} = require('../utils/constants');
 
 const router = express.Router();
 
-router.get('/add-news', isLogged, isPermit(ROLE.ADMIN), adminController.getAddNews);
-router.post('/add-news', isLogged, adminController.postAddNews);
-router.get('/news-list', isLogged, adminController.getNewsList);
-router.get('/edit-news/:newsId', isLogged, adminController.getEditNews);
-router.post('/edit-news', isLogged, adminController.postEditNews);
-router.post('/delete-news', isLogged, adminController.postDeleteNews);
+router.get('/add-news', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adminController.getAddNews);
+router.post('/add-news', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adminController.postAddNews);
+router.get('/news-list', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adminController.getNewsList);
+router.get('/edit-news/:newsId', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adminController.getEditNews);
+router.post('/edit-news', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adminController.postEditNews);
+router.post('/delete-news', isLogged, isPermit([ROLE.ADMIN, ROLE.MOD]), adminController.postDeleteNews);
 
 module.exports = router;
