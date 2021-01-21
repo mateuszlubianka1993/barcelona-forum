@@ -1,0 +1,14 @@
+.favourite-btn {
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+}
+
+.favourite-btn:hover {
+    color: #db0030;
+}
+
+.favourite-btn.liked {
+    color: #db0030;
+    cursor: default;
+    pointer-events: none;
+}

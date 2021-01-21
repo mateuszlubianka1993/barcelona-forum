@@ -20,7 +20,20 @@ const commentSchema = new Schema({
 	author: {
 		type: String,
 		required: true
-	}
+	},
+	createdAt: {
+		type: Date,
+		default: Date.now
+	},
+	likedBy: [{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],
 });
+
+commentSchema.methods.updateComment = function(itemId, userId) {
+	const updatedItems = [...this.likedBy];
+	updatedItems.push(userId);
+
+	this.likedBy = updatedItems;
+	return this.save();
+};
 
 module.exports = mongoose.model('Comment', commentSchema);

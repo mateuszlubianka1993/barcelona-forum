@@ -15,5 +15,6 @@ router.get('/history', forumController.getHistory);
 router.get('/anthem', forumController.getAnthem);
 router.get('/trophies', forumController.getTrophies);
 router.post('/add-comment', isLogged, forumController.postAddComment);
+router.post('/favouriteCommentsList', isLogged, forumController.postFavouriteComments);
 
 module.exports = router;

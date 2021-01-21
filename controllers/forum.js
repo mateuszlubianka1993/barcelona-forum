@@ -1,5 +1,6 @@
 const News = require('../models/news');
 const Comment = require('../models/comment');
+const User = require('../models/user');
 
 exports.getHome = (req, res) => {   
 	News.find()
@@ -31,6 +32,7 @@ exports.getNewsList = (req, res) => {
 
 exports.getNewsItem = (req, res) => {
 	const newsId = req.params.newsId;
+	const userId = req.user._id;
 	News.findById(newsId)
 		.populate('comments')
 		.exec((err, newsItem) => {
@@ -40,7 +42,8 @@ exports.getNewsItem = (req, res) => {
 				newsItem: newsItem,
 				pageTitle: 'News Page',
 				path: '/news-list',
-				comments: comments
+				comments: comments,
+				userId: userId
 			});
 		});
 };
@@ -133,4 +136,33 @@ exports.postAddComment = (req, res) => {
 			console.log(err);
 		});
 
+};
+
+exports.postFavouriteComments = (req, res) => {
+	const commentId = req.body.commentId;
+	const newsId = req.body.newsId;
+	const userId = req.user;
+
+	User.findById(userId).then(user => {
+		if(user.favouriteComments.includes(commentId)) {
+			return res.redirect(`/news-list/${newsId}`);
+		}
+
+		Comment.findById(commentId)
+			.then(comment => {
+				return comment.updateComment(comment._id, userId);
+			})
+			.then(comment => {
+				return req.user.addToFavouriteComments(comment);
+			})
+			.then(() => {
+				res.redirect(`/news-list/${newsId}`);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+
+	}).catch(err => {
+		console.log(err);
+	});
 };

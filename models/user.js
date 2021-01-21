@@ -28,6 +28,7 @@ const userSchema = new Schema({
 			}
 		}]
 	},
+	favouriteComments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 	role: {
 		required: true,
 		default: ROLE.USER,
@@ -63,6 +64,21 @@ userSchema.methods.deleteFavouriteItem = function(itemId) {
 	});
 
 	this.favouriteNews.items = updatedItems;
+	return this.save();
+};
+
+userSchema.methods.addToFavouriteComments = function(comment) {
+	const favouriteComments = this.favouriteComments;
+	let updatedFavouriteComments = [];
+	if(!favouriteComments) {
+		updatedFavouriteComments.push(comment._id);
+	} else {
+		updatedFavouriteComments = [...this.favouriteNews.items];
+		updatedFavouriteComments.push(comment._id);
+	}
+        
+	this.favouriteComments = updatedFavouriteComments;
+
 	return this.save();
 };
 
