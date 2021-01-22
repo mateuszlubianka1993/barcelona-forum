@@ -73,7 +73,7 @@ userSchema.methods.addToFavouriteComments = function(comment) {
 	if(!favouriteComments) {
 		updatedFavouriteComments.push(comment._id);
 	} else {
-		updatedFavouriteComments = [...this.favouriteNews.items];
+		updatedFavouriteComments = [...this.favouriteComments];
 		updatedFavouriteComments.push(comment._id);
 	}
         

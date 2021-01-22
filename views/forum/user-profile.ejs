@@ -1,0 +1,84 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/user/user.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <div class="container-fluid">
+           <h2 class="text-center mb-5 mt-4">Profil użytkownika <%=user.username%></h1>
+           <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Dane</a>
+              <a class="nav-link" id="v-pills-comments-tab" data-bs-toggle="pill" href="#v-pills-comments" role="tab" aria-controls="v-pills-comments" aria-selected="false">Komentarze</a>
+              <a class="nav-link" id="v-pills-liked-tab" data-bs-toggle="pill" href="#v-pills-liked" role="tab" aria-controls="v-pills-liked" aria-selected="false">Polubione</a>
+              <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Ustawienia</a>
+            </div>
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <div class="card" style="width: 25rem;">
+                  <img src="/img/avatar-default.png" class="card-img-top" alt="user-avatar">
+                  <div class="card-body">
+                    <p class="card-text"><span class="fw-bold">Nazwa użytkownika: </span> <%=user.username%></p>
+                    <p class="card-text"><span class="fw-bold">Adres email: </span> <%=user.email%></p>
+                    <p class="card-text"> <span class="fw-bold">Rola: </span> <%=user.role%></p>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="v-pills-comments" role="tabpanel" aria-labelledby="v-pills-comments-tab">
+                <%if(comments && comments.length >= 1) {%>
+                  <div class="comments mt-3">
+                      <% for (let comment of comments) { %>
+                          <div class="card m-auto mb-2 comment-box">
+                              <div class="card-header bg-dark text-white d-flex align-items-center">
+                                  <div>
+                                      <%=comment.author%> || <%= JSON.stringify(new Date(comment.createdAt).toLocaleString()).slice(1,21) %>
+                                  </div>
+                                  <div>
+                                      
+                                  </div>
+                              </div>
+                              <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                  <p><%=comment.commentBody%></p>
+                                </blockquote>
+                              </div>
+                            </div>
+                      <%}%>  
+                  </div>
+                  <%} else {%>
+                    <h2 class="text-center mb-5 mt-4">Jeszcze nie dodałeś żadnych komentarzy.</h2>
+                  <% } %>
+              </div>
+              <div class="tab-pane fade" id="v-pills-liked" role="tabpanel" aria-labelledby="v-pills-liked-tab">
+                <%if(user.favouriteComments && user.favouriteComments.length >= 1) {%>
+                  <div class="comments mt-3">
+                      <% for (let comment of user.favouriteComments) { %>
+                          <div class="card m-auto mb-2 comment-box">
+                              <div class="card-header bg-dark text-white d-flex align-items-center">
+                                  <div>
+                                      <%=comment.author%> || <%= JSON.stringify(new Date(comment.createdAt).toLocaleString()).slice(1,21) %>
+                                  </div>
+                                  <div>
+                                      
+                                  </div>
+                              </div>
+                              <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                  <p><%=comment.commentBody%></p>
+                                </blockquote>
+                              </div>
+                            </div>
+                      <%}%>  
+                  </div>
+                <%} else {%>
+                  <h2 class="text-center mb-5 mt-4">Jeszcze nie masz polubionych komentarzy</h2>
+                <% } %>
+              </div>
+              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                <h2 class="text-center mb-5 mt-4">Funkcjonalność w fazie implementacji...</h2>
+              </div>
+            </div>
+          </div>   
+        </div>
+    </main>
+    <%- include('../includes/end.ejs') %>

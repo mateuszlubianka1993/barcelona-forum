@@ -166,3 +166,30 @@ exports.postFavouriteComments = (req, res) => {
 		console.log(err);
 	});
 };
+
+exports.getUserProfile = (req, res) => { 
+	const userId = req.user;  
+	User.findById(userId)
+		.then(user => {
+			user.populate('favouriteComments')
+				.execPopulate()
+				.then(user => {
+					Comment.find({userId: user._id})
+						.then(comments => {
+							res.render('forum/user-profile', {
+								pageTitle: 'User Profile',
+								path: '/user/user-profile',
+								user: user,
+								comments: comments
+							});
+						}).catch(err => {
+							console.log(err);
+						});
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		}).catch(err => {
+			console.log(err);
+		});
+};
