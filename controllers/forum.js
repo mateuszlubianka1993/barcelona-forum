@@ -193,3 +193,22 @@ exports.getUserProfile = (req, res) => {
 			console.log(err);
 		});
 };
+
+exports.postDeleteFavouriteComment = (req, res) => {
+	const commentId = req.body.commentId;
+	const userId = req.user;
+
+	Comment.findById(commentId)
+		.then(comment => {
+			return comment.updateCommentDelete(userId);
+		})
+		.then(comment => {
+			return req.user.deleteFavouriteComment(comment);
+		})
+		.then(() => {
+			res.redirect('/user/user-profile');
+		})
+		.catch(err => {
+			console.log(err);
+		});
+};

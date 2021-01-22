@@ -82,4 +82,13 @@ userSchema.methods.addToFavouriteComments = function(comment) {
 	return this.save();
 };
 
+userSchema.methods.deleteFavouriteComment = function(itemId) {
+	const updatedItems = this.favouriteComments.filter(item => {
+		return item._id.toString() !== itemId._id.toString();
+	});
+
+	this.favouriteComments = updatedItems;
+	return this.save();
+};
+
 module.exports = mongoose.model('User', userSchema);

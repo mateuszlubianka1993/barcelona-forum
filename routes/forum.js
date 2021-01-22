@@ -17,5 +17,6 @@ router.get('/trophies', forumController.getTrophies);
 router.post('/add-comment', isLogged, forumController.postAddComment);
 router.post('/favouriteCommentsList', isLogged, forumController.postFavouriteComments);
 router.get('/user/user-profile', isLogged, forumController.getUserProfile);
+router.post('/delete-favourite-comment', isLogged, forumController.postDeleteFavouriteComment);
 
 module.exports = router;

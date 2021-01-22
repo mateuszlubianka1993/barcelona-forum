@@ -54,12 +54,18 @@
                   <div class="comments mt-3">
                       <% for (let comment of user.favouriteComments) { %>
                           <div class="card m-auto mb-2 comment-box">
-                              <div class="card-header bg-dark text-white d-flex align-items-center">
+                              <div class="card-header bg-dark text-white d-flex align-items-center justify-content-between">
                                   <div>
                                       <%=comment.author%> || <%= JSON.stringify(new Date(comment.createdAt).toLocaleString()).slice(1,21) %>
                                   </div>
                                   <div>
-                                      
+                                    <form action="/delete-favourite-comment" method="POST" class="d-grid gap-2">
+                                      <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                      <input type="hidden" name="commentId" value="<%=comment._id%>">
+                                      <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
+                                        <i class="bi bi-trash"></i>
+                                      </button>
+                                  </form>    
                                   </div>
                               </div>
                               <div class="card-body">

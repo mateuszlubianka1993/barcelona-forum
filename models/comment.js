@@ -36,4 +36,13 @@ commentSchema.methods.updateComment = function(itemId, userId) {
 	return this.save();
 };
 
+commentSchema.methods.updateCommentDelete = function(userId) {
+	const updatedItems = this.likedBy.filter(item => {
+		return item._id.toString() !== userId._id.toString();
+	});
+
+	this.likedBy = updatedItems;
+	return this.save();
+};
+
 module.exports = mongoose.model('Comment', commentSchema);
