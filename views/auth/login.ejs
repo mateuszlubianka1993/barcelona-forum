@@ -5,7 +5,7 @@
     <main>
         <div class="container">
             <div class="row justify-content-center">
-                <h1 class="text-center mb-4 mt-4">Login</h1>
+                <h1 class="text-center mb-4 mt-4">Zaloguj się</h1>
                 <%if(errorMessage && errorMessage.length > 0) {%>
                     <div class="alert alert-danger" role="alert">
                         <%=errorMessage%>
@@ -23,21 +23,23 @@
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="password">Password</label>
+                        <label for="password">Hasło</label>
                         <input 
                             name="password" 
                             type="password" 
                             class="form-control" 
                             id="password" 
-                            placeholder="Password"
+                            placeholder="Hasło"
                             value="<%=userInput.password%>"
                         >
                     </div>
-                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                    <button class="btn btn-primary" type="submit">Login</button>
+                    <div class="d-grid gap-2">
+                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                        <button class="btn btn-success" type="submit">Zaloguj się</button>
+                    </div>
                 </form>
                 <p class="text-center mb-4 mt-4">
-                    <a href="/change-password" class="link-primary">Change password</a>
+                    <a href="/change-password" class="link-primary">Zmień hasło</a>
                 </p>
             </div>
         </div>
