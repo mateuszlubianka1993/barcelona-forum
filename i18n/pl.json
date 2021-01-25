@@ -39,5 +39,20 @@
         "MODERATOR": "Moderator",
         "USER": "Użytkownik"
     },
-    "SAVE_CHANGES": "SZapisz zamiany"
+    "SAVE_CHANGES": "Zapisz zamiany",
+    "USER_PROFILE": "Profil użytkownika",
+    "DATA": "Dane",
+    "COMMENTS": "Komentarze",
+    "LIKED": "Polubione",
+    "SETTINGS": "Ustawienia",
+    "E_MAIL_ADRESS": "Adres email",
+    "MESSAGES": {
+        "DID_NOT_ADD_COMMENT_YET": "Jeszcze nie dodałeś żadnych komentarzy.",
+        "HAVE_NOT_LIKE_COMMENT_YET": "Jeszcze nie masz polubionych komentarzy",
+        "CHANGE_SYSTEM_LANGUAGE": "Zmień język systemu"
+    },
+    "LANGUAGES": {
+        "POLISH": "Polski",
+        "ENGLISH": "Angielski"
+    }
 }

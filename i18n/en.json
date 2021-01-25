@@ -39,5 +39,20 @@
         "MODERATOR": "Moderator",
         "USER": "User"
     },
-    "SAVE_CHANGES": "Save changes"
+    "SAVE_CHANGES": "Save changes",
+    "USER_PROFILE": "User profile",
+    "DATA": "Data",
+    "COMMENTS": "Comments",
+    "LIKED": "Liked",
+    "SETTINGS": "Settings",
+    "E_MAIL_ADRESS": "E-mail adress",
+    "MESSAGES": {
+        "DID_NOT_ADD_COMMENT_YET": "You haven't added any comments yet.",
+        "HAVE_NOT_LIKE_COMMENT_YET": "You don't have any liked comments yet.",
+        "CHANGE_SYSTEM_LANGUAGE": "Change the system language"
+    },
+    "LANGUAGES": {
+        "POLISH": "Polish",
+        "ENGLISH": "English"
+    }
 }
