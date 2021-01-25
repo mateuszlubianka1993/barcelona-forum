@@ -8,47 +8,65 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link <%= path === '/' ? 'active' : '' %>" aria-current="page" href="/">Główna</a>
+                <a class="nav-link <%= path === '/' ? 'active' : '' %>" aria-current="page" href="/">
+                  <%=translation.NAV.HOME%>
+                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <%= path === '/news-list' ? 'active' : '' %>" href="/news-list">Newsy</a>
+                <a class="nav-link <%= path === '/news-list' ? 'active' : '' %>" href="/news-list">
+                  <%=translation.NAV.NEWS_LIST%>
+                </a>
               </li>
               <li class="nav-item dropdown <%= path === '/club' ? 'active' : '' %>">
                 <a class="nav-link dropdown-toggle" href="#" id="clubMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Klub
+                  <%=translation.NAV.CLUB%>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="clubMenuLink">
-                  <li><a class="dropdown-item <%= path === '/club' ? 'active' : '' %>" href="/history">Historia</a></li>
-                  <li><a class="dropdown-item <%= path === '/anthem' ? 'active' : '' %>" href="/anthem">Hymn</a></li>
-                  <li><a class="dropdown-item <%= path === '/trophies' ? 'active' : '' %>" href="/trophies">Trofea</a></li>
+                  <li><a class="dropdown-item <%= path === '/club' ? 'active' : '' %>" href="/history">
+                    <%=translation.NAV.HISTORY%>
+                  </a></li>
+                  <li><a class="dropdown-item <%= path === '/anthem' ? 'active' : '' %>" href="/anthem">
+                    <%=translation.NAV.ANTHEM%>
+                  </a></li>
+                  <li><a class="dropdown-item <%= path === '/trophies' ? 'active' : '' %>" href="/trophies">
+                    <%=translation.NAV.TROPHIES%>
+                  </a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown <%= path === '/rankings' ? 'active' : '' %>">
                 <a class="nav-link dropdown-toggle" href="#" id="rankingsMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Rankingi
+                  <%=translation.NAV.RANKINGS%>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="rankingsMenuLink">
-                  <li><a class="dropdown-item <%= path === '/users-ranking' ? 'active' : '' %>" href="/users-ranking">Ranking użytkowników</a></li>
+                  <li><a class="dropdown-item <%= path === '/users-ranking' ? 'active' : '' %>" href="/users-ranking">
+                    <%=translation.NAV.USERS_RANKING%>
+                  </a></li>
                 </ul>
               </li>
               <%if(isAuth && isAdminMod) {%>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="modMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Moderator
+                    <%=translation.NAV.MODERATOR%>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="modMenuLink">
-                    <li><a class="dropdown-item <%= path === '/admin/add-news' ? 'active' : '' %>" href="/admin/add-news">Dodaj news</a></li>
-                    <li><a class="dropdown-item <%= path === '/admin/news-list' ? 'active' : '' %>" href="/admin/news-list">Lista news'ów</a></li>
+                    <li><a class="dropdown-item <%= path === '/admin/add-news' ? 'active' : '' %>" href="/admin/add-news">
+                      <%=translation.NAV.ADD_NEWS%>
+                    </a></li>
+                    <li><a class="dropdown-item <%= path === '/admin/news-list' ? 'active' : '' %>" href="/admin/news-list">
+                      <%=translation.NAV.NEWS_LIST%>
+                    </a></li>
                   </ul>
                 </li>
               <%}%>
               <%if(isAuth && isAdmin) {%>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="adminMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Admin
+                    <%=translation.NAV.ADMIN%>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="adminMenuLink">
-                    <li><a class="dropdown-item <%= path === '/admin/users-list' ? 'active' : '' %>" href="/admin/users-list">Użytkownicy</a></li>
+                    <li><a class="dropdown-item <%= path === '/admin/users-list' ? 'active' : '' %>" href="/admin/users-list">
+                      <%=translation.NAV.USERS%>
+                    </a></li>
                   </ul>
                 </li>
               <%}%>
@@ -58,21 +76,31 @@
                     <i class="bi bi-person-square"></i>
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="adminMenuLink">
-                    <li><a class="dropdown-item <%= path === '/user/user-profile' ? 'active' : '' %>" href="/user/user-profile">Profil</a></li>
-                    <li><a class="dropdown-item <%= path === '/user/favourite-news-list' ? 'active' : '' %>" href="/user/favourite-news-list">Ulubione newsy</a></li>
+                    <li><a class="dropdown-item <%= path === '/user/user-profile' ? 'active' : '' %>" href="/user/user-profile">
+                      <%=translation.NAV.PROFILE%>
+                    </a></li>
+                    <li><a class="dropdown-item <%= path === '/user/favourite-news-list' ? 'active' : '' %>" href="/user/favourite-news-list">
+                      <%=translation.NAV.FAVORITE_NEWS%>
+                    </a></li>
                   </ul>
                 </li>
               <%}%>
             </ul>
             <%if(!isAuth) {%>
             <div class="form-inline my-2 my-lg-0 mx-2">
-              <a href="/login" class="btn btn-outline-success my-2 my-sm-0 mx-2">Zaloguj się</a>
-              <a href="/signup" class="btn btn-outline-success my-2 my-sm-0">Dołącz</a>
+              <a href="/login" class="btn btn-outline-success my-2 my-sm-0 mx-2">
+                <%=translation.NAV.SIGN_IN%>
+              </a>
+              <a href="/signup" class="btn btn-outline-success my-2 my-sm-0">
+                <%=translation.NAV.JOIN_US%>
+              </a>
             </div>
             <%} else {%>
             <form action="/logout" method="post" class="form-inline my-2 my-lg-0">
               <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Wyloguj</button>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                <%=translation.NAV.SIGN_OUT%>
+              </button>
             </form>
             <%}%>
           </div>

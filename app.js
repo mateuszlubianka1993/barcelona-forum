@@ -9,6 +9,7 @@ const csurf = require('csurf');
 const connectFlash = require('connect-flash');
 const multer = require('multer');
 const {v4} = require('uuid');
+const i18n = require('i18n-express');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -107,6 +108,12 @@ app.use((req, res, next) => {
 	res.locals.csrfToken = req.csrfToken();
 	next();
 });
+
+app.use(i18n({
+	translationsPath: path.join(dirname, 'i18n'), 
+	siteLangs: ['pl','en'],
+	textsVarName: 'translation'
+}));
 
 app.use('/admin', adminRoutes);
 app.use(forumRoutes);

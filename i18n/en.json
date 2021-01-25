@@ -1,0 +1,21 @@
+{ 
+    "NAV": {
+        "HOME": "Home",
+        "NEWS_LIST": "News list",
+        "CLUB": "Club",
+        "HISTORY": "History",
+        "ANTHEM": "Anthem",
+        "TROPHIES": "Trophies",
+        "RANKINGS": "Rankings",
+        "USERS_RANKING": "Users rankings",
+        "MODERATOR": "Moderator",
+        "ADD_NEWS": "Add news",
+        "ADMIN": "Admin",
+        "USERS": "Users",
+        "PROFILE": "Profile",
+        "FAVORITE_NEWS": "Favorite news",
+        "SIGN_IN": "Sign In",
+        "JOIN_US": "Join Us",
+        "SIGN_OUT": "Sign Out"
+    } 
+}
