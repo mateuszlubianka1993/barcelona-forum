@@ -272,3 +272,19 @@ exports.postSubtractCommentPoint = (req, res) => {
 			console.log(err);
 		});
 };
+
+exports.getUsersRanking = (req, res) => {
+	User.find().sort({score: -1}).limit(10).exec( 
+		function(err, users) {
+			if(err) {
+				return console.log(err);
+			}
+
+			res.render('forum/users-ranking', {
+				pageTitle: 'Users Ranking',
+				path: '/users-rankig',
+				users: users
+			});
+		}
+	);
+};

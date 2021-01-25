@@ -1,0 +1,28 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <h1 class="text-center mb-3 mt-3">10 najlepiej ocenianych użytkowników</h1>
+        <div class="container">
+            <ul class="list-group">
+                <% let index = 1 %>
+                <% for (let user of users) { %>
+                    <li class="list-group-item d-flex flex-row justify-content-between align-items-center flex-wrap">
+                        <div class="">
+                            <h4><%=index++%></h4>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="card-body">
+                                <h5 class="card-title">Nazwa użytkownika: <%= user.username %> <span class="badge bg-secondary"><%= user.role %></span></h5>
+                              </div>
+                        </div>
+                        <div>
+                            <h4>Pkt.: <%=user.score%></h4>
+                        </div>
+                      </li>
+                <% } %>    
+            </ul>
+        </div>
+    </main>
+    <%- include('../includes/end.ejs') %>

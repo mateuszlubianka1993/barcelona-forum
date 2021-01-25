@@ -23,6 +23,14 @@
                   <li><a class="dropdown-item <%= path === '/trophies' ? 'active' : '' %>" href="/trophies">Trofea</a></li>
                 </ul>
               </li>
+              <li class="nav-item dropdown <%= path === '/rankings' ? 'active' : '' %>">
+                <a class="nav-link dropdown-toggle" href="#" id="rankingsMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Rankingi
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="rankingsMenuLink">
+                  <li><a class="dropdown-item <%= path === '/users-ranking' ? 'active' : '' %>" href="/users-ranking">Ranking użytkowników</a></li>
+                </ul>
+              </li>
               <%if(isAuth && isAdminMod) {%>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="modMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

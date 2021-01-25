@@ -20,5 +20,6 @@ router.get('/user/user-profile', isLogged, forumController.getUserProfile);
 router.post('/delete-favourite-comment', isLogged, forumController.postDeleteFavouriteComment);
 router.post('/addCommentPoint', isLogged, forumController.postAddCommentPoint);
 router.post('/subtractCommentPoint', isLogged, forumController.postSubtractCommentPoint);
+router.get('/users-ranking', forumController.getUsersRanking);
 
 module.exports = router;
