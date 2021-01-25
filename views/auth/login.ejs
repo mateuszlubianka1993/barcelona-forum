@@ -5,7 +5,7 @@
     <main>
         <div class="container">
             <div class="row justify-content-center">
-                <h1 class="text-center mb-4 mt-4">Zaloguj się</h1>
+                <h1 class="text-center mb-4 mt-4"><%=translation.SIGN_IN%></h1>
                 <%if(errorMessage && errorMessage.length > 0) {%>
                     <div class="alert alert-danger" role="alert">
                         <%=errorMessage%>
@@ -13,33 +13,33 @@
                 <%}%>
                 <form class="col-10 col-md-8" action="/login" method="POST">
                     <div class="mb-3">
-                        <label for="email">Email</label>
+                        <label for="email"><%=translation.E_MAIL%></label>
                         <input 
                             name="email" 
                             type="email" 
                             class="form-control" 
-                            id="email" placeholder="Email" 
+                            id="email" placeholder="<%=translation.E_MAIL%>" 
                             value="<%=userInput.email%>"
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="password">Hasło</label>
+                        <label for="password"><%=translation.PASSWORD%></label>
                         <input 
                             name="password" 
                             type="password" 
                             class="form-control" 
                             id="password" 
-                            placeholder="Hasło"
+                            placeholder="<%=translation.PASSWORD%>"
                             value="<%=userInput.password%>"
                         >
                     </div>
                     <div class="d-grid gap-2">
                         <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                        <button class="btn btn-success" type="submit">Zaloguj się</button>
+                        <button class="btn btn-success" type="submit"><%=translation.SIGN_IN%></button>
                     </div>
                 </form>
                 <p class="text-center mb-4 mt-4">
-                    <a href="/change-password" class="link-primary">Zmień hasło</a>
+                    <a href="/change-password" class="link-primary"><%=translation.CHANGE_PASSWORD%></a>
                 </p>
             </div>
         </div>

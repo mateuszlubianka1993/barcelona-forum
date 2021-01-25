@@ -5,24 +5,24 @@
     <main>
         <div class="container">
             <div class="row justify-content-center">
-                <h1 class="text-center mb-4 mt-4"><%= editing ? 'Edytuj news' : 'Dodaj news'%></h1>
+                <h1 class="text-center mb-4 mt-4"><%= editing ? translation.EDIT_NEWS : translation.ADD_NEWS%></h1>
                 <form class="col-10 col-md-8" action="/admin/<%if(editing) {%>edit-news<%} else {%>add-news<%}%>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="title">Tytuł</label>
+                        <label for="title"><%=translation.TITLE%></label>
                         <input 
                             name="title" 
                             type="text" 
                             class="form-control" 
-                            id="title" placeholder="Tytuł" 
+                            id="title" placeholder="<%=translation.TITLE%>" 
                             value="<%if(editing) {%><%=newsItem.title%><%}%>"
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Zdjęcie</label>
+                        <label for="image" class="form-label"><%=translation.IMAGE%></label>
                         <input class="form-control" type="file" id="image" name="image">
                     </div>
                     <div class="mb-3">
-                        <label for="description">Opis</label>
+                        <label for="description"><%=translation.DESCRIPTION%></label>
                         <textarea 
                             name="description"
                             class="form-control" 
@@ -30,7 +30,7 @@
                         ><%if(editing) {%><%=newsItem.description%><%}%></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="content">Zawartość</label>
+                        <label for="content"><%=translation.CONTENT%></label>
                         <textarea 
                             name="content"
                             class="form-control" 
@@ -42,7 +42,7 @@
                     <%}%>
                     <div class="d-grid gap-2">
                         <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                        <button class="btn btn-success" type="submit"><%= editing ? 'Edytuj news' : 'Dodaj news'%></button>
+                        <button class="btn btn-success" type="submit"><%= editing ? translation.EDIT_NEWS : translation.ADD_NEWS%></button>
                     </div>
                 </form>
             </div>

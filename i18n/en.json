@@ -17,5 +17,27 @@
         "SIGN_IN": "Sign In",
         "JOIN_US": "Join Us",
         "SIGN_OUT": "Sign Out"
-    } 
+    },
+    "CREATE_ACCOUNT": "Create an account",
+    "USERNAME": "Username",
+    "E_MAIL": "E-mail",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "REGISTER": "Register",
+    "SIGN_IN": "Sign In",
+    "CHANGE_PASSWORD": "Change password",
+    "TITLE": "Title",
+    "IMAGE": "Image",
+    "DESCRIPTION": "Description",
+    "CONTENT": "Content",
+    "ADD_NEWS": "Add news",
+    "EDIT_NEWS": "Edit news",
+    "EDIT_USER": "Edit user",
+    "USER_ROLE": "User role",
+    "ROLES": {
+        "ADMIN": "Admin",
+        "MODERATOR": "Moderator",
+        "USER": "User"
+    },
+    "SAVE_CHANGES": "Save changes"
 }

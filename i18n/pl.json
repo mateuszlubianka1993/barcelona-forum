@@ -17,5 +17,27 @@
         "SIGN_IN": "Zaloguj się",
         "JOIN_US": "Dołącz",
         "SIGN_OUT": "Wyloguj"
-    } 
+    },
+    "CREATE_ACCOUNT": "Załóż konto",
+    "USERNAME": "Nazwa użytkownika",
+    "E_MAIL": "Email",
+    "PASSWORD": "Hasło",
+    "CONFIRM_PASSWORD": "Potwierdź hasło",
+    "REGISTER": "Zarejestruj się",
+    "SIGN_IN": "Zaloguj się",
+    "CHANGE_PASSWORD": "Zmień hasło",
+    "TITLE": "Tytuł",
+    "IMAGE": "Zdjęcie",
+    "DESCRIPTION": "Opis",
+    "CONTENT": "Zawartość",
+    "ADD_NEWS": "Dodaj news",
+    "EDIT_NEWS": "Edytuj news",
+    "EDIT_USER": "Edytuj użytkownika",
+    "USER_ROLE": "Rola użytkownika",
+    "ROLES": {
+        "ADMIN": "Admin",
+        "MODERATOR": "Moderator",
+        "USER": "Użytkownik"
+    },
+    "SAVE_CHANGES": "SZapisz zamiany"
 }
