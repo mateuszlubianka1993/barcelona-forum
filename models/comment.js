@@ -25,7 +25,13 @@ const commentSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	likedBy: [{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],
+	likedBy: [{ type: Schema.Types.ObjectId, ref: 'User', default: [] }],	
+	points: {
+		type: Number,
+		required: true,
+		default: 0
+	},
+	ratedBy: [{ type: Schema.Types.ObjectId, ref: 'User', default: [] }]
 });
 
 commentSchema.methods.updateComment = function(itemId, userId) {
@@ -42,6 +48,23 @@ commentSchema.methods.updateCommentDelete = function(userId) {
 	});
 
 	this.likedBy = updatedItems;
+	return this.save();
+};
+
+commentSchema.methods.updateCommentPoints = function(mode) {
+	if(mode === 'add') {
+		this.points++;
+	} else if(mode === 'subtract') {
+		this.points--;
+	}
+	return this.save();
+};
+
+commentSchema.methods.updateRatedBy = function(userId) {
+	const updatedItems = [...this.ratedBy];
+	updatedItems.push(userId);
+
+	this.ratedBy = updatedItems;
 	return this.save();
 };
 

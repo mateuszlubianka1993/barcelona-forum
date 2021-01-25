@@ -32,7 +32,7 @@ exports.getNewsList = (req, res) => {
 
 exports.getNewsItem = (req, res) => {
 	const newsId = req.params.newsId;
-	const userId = req.user._id;
+	const userId = req.user ? req.user._id : null;
 	News.findById(newsId)
 		.populate('comments')
 		.exec((err, newsItem) => {
@@ -207,6 +207,66 @@ exports.postDeleteFavouriteComment = (req, res) => {
 		})
 		.then(() => {
 			res.redirect('/user/user-profile');
+		})
+		.catch(err => {
+			console.log(err);
+		});
+};
+
+exports.postAddCommentPoint = (req, res) => {
+	const commentId = req.body.commentId;
+	const newsId = req.body.newsId;
+	const userId = req.user;
+
+	Comment.findById(commentId)
+		.then(comment => {
+			return comment.updateCommentPoints('add');
+		})
+		.then(comment => {
+			return comment.updateRatedBy(userId);
+		})
+		.then(comment => {
+			const commentUserId = comment.userId;
+			User.findById(commentUserId)
+				.then(user => {
+					return user.updateScore('add');
+				})
+				.then(() => {
+					res.redirect(`/news-list/${newsId}`);
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		})
+		.catch(err => {
+			console.log(err);
+		});
+};
+
+exports.postSubtractCommentPoint = (req, res) => {
+	const commentId = req.body.commentId;
+	const newsId = req.body.newsId;
+	const userId = req.user;
+
+	Comment.findById(commentId)
+		.then(comment => {
+			return comment.updateCommentPoints('subtract');
+		})
+		.then(comment => {
+			return comment.updateRatedBy(userId);
+		})
+		.then(comment => {
+			const commentUserId = comment.userId;
+			User.findById(commentUserId)
+				.then(user => {
+					return user.updateScore('subtract');
+				})
+				.then(() => {
+					res.redirect(`/news-list/${newsId}`);
+				})
+				.catch(err => {
+					console.log(err);
+				});
 		})
 		.catch(err => {
 			console.log(err);

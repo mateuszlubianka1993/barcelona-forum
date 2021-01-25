@@ -18,5 +18,7 @@ router.post('/add-comment', isLogged, forumController.postAddComment);
 router.post('/favouriteCommentsList', isLogged, forumController.postFavouriteComments);
 router.get('/user/user-profile', isLogged, forumController.getUserProfile);
 router.post('/delete-favourite-comment', isLogged, forumController.postDeleteFavouriteComment);
+router.post('/addCommentPoint', isLogged, forumController.postAddCommentPoint);
+router.post('/subtractCommentPoint', isLogged, forumController.postSubtractCommentPoint);
 
 module.exports = router;

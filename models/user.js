@@ -33,6 +33,11 @@ const userSchema = new Schema({
 		required: true,
 		default: ROLE.USER,
 		type: String
+	},
+	score: {
+		type: Number,
+		required: true,
+		default: 10
 	}
 });
 
@@ -88,6 +93,15 @@ userSchema.methods.deleteFavouriteComment = function(itemId) {
 	});
 
 	this.favouriteComments = updatedItems;
+	return this.save();
+};
+
+userSchema.methods.updateScore = function(mode) {
+	if(mode === 'add') {
+		this.score++;
+	} else if(mode === 'subtract') {
+		this.score--;
+	}
 	return this.save();
 };
 

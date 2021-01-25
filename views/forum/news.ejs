@@ -49,8 +49,8 @@
                                 <div>
                                     <%=comment.author%> || <%= JSON.stringify(new Date(comment.createdAt).toLocaleString()).slice(1,21) %>
                                 </div>
-                                <div>
-                                    <%if(isAuth) {%>
+                                <%if(isAuth) {%>
+                                    <div>  
                                         <form action="/favouriteCommentsList" method="post">
                                             <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                             <% let isLiked = comment.likedBy.includes(userId) ? "liked" : "" %>
@@ -58,8 +58,24 @@
                                             <input type="hidden" name="commentId" value="<%=comment._id%>">
                                             <input type="hidden" name="newsId" value="<%=newsItem._id%>">
                                         </form>
-                                    <%}%>
-                                </div>
+                                    </div>
+                                    <div class="flex-grow-1 d-flex justify-content-end">
+                                        <% let wasRated = comment.ratedBy.includes(userId) ? "rated" : "" %>
+                                        <form action="/addCommentPoint" method="post">
+                                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                            <button type="submit" class="btn btn-sm favourite-btn <%= wasRated ? 'liked' : '' %>" ><i class="bi bi-plus-square-fill"></i></button>
+                                            <input type="hidden" name="commentId" value="<%=comment._id%>">
+                                            <input type="hidden" name="newsId" value="<%=newsItem._id%>">
+                                        </form>
+                                        <span class="badge bg-light text-dark d-flex align-items-center"><%=comment.points%></span>
+                                        <form action="/subtractCommentPoint" method="post">
+                                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                            <button type="submit" class="btn btn-sm favourite-btn <%= wasRated ? 'liked' : '' %>"><i class="bi bi-dash-square-fill"></i></button>
+                                            <input type="hidden" name="commentId" value="<%=comment._id%>">
+                                            <input type="hidden" name="newsId" value="<%=newsItem._id%>">
+                                        </form>
+                                    </div>
+                                <%}%>
                             </div>
                             <div class="card-body">
                               <blockquote class="blockquote mb-0">
