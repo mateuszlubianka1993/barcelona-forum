@@ -5,7 +5,7 @@
     <main>
         <div class="container">
             <div class="row justify-content-center">
-                <h1 class="text-center mb-4 mt-4">Sign Up</h1>
+                <h1 class="text-center mb-4 mt-4">Załóż konto</h1>
                 <%if(signupEmailError && signupEmailError.length > 0) {%>
                     <div class="alert alert-danger" role="alert">
                         <%=signupEmailError%>
@@ -13,12 +13,12 @@
                 <%}%>
                 <form class="col-10 col-md-8" action="/signup" method="POST">
                     <div class="mb-3">
-                        <label for="username">User Name</label>
+                        <label for="username">Nazwa użytkownika</label>
                         <input 
                             name="username" 
                             type="text" 
                             class="form-control" 
-                            id="username" placeholder="User Name"
+                            id="username" placeholder="Nazwa użytkownika"
                             value="<%=userInput.username%>" 
                         >
                     </div>
@@ -33,28 +33,30 @@
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="password">Password</label>
+                        <label for="password">Hasło</label>
                         <input 
                             name="password" 
                             type="password" 
                             class="form-control" 
                             id="password" 
-                            placeholder="Password"
+                            placeholder="Hasło"
                             value="<%=userInput.password%>"
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="confirmPassword">Confirm password</label>
+                        <label for="confirmPassword">Potwierdź hasło</label>
                         <input 
                             name="confirmPassword" 
                             type="password" 
                             class="form-control" 
                             id="confirmPassword" 
-                            placeholder="Confirm password"
+                            placeholder="Potwierdź hasło"
                         >
                     </div>
-                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                    <div class="d-grid gap-2">
+                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                        <button class="btn btn-success" type="submit">Zarejestruj się</button>
+                    </div>
                 </form>
             </div>
         </div>
