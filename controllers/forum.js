@@ -2,14 +2,17 @@ const News = require('../models/news');
 const Comment = require('../models/comment');
 const User = require('../models/user');
 
-exports.getHome = (req, res) => {   
+exports.getHome = (req, res) => {
+	const user = req.user;
+
 	News.find()
 		.then(news => {
 			res.render('forum/home', {
 				pageTitle: 'Forum Home Page',
 				news: news,
 				path: '/',
-				hasNews: news.length > 0
+				hasNews: news.length > 0,
+				user: user || false
 			});
 		}).catch(err => {
 			console.log(err);

@@ -4,10 +4,10 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <div class="container-fluid">
+        <div class="container">
             <% if (news.length > 0) { %>
             <div class="row">
-                <div class="col-xs-12 nopadding">
+                <div class="col-xs-12 nopadding col-lg-8">
                     <a href="/news-list/<%=news[0]._id%>">
                         <div class="main-news news">
                             <img src="<%=news[0].imageUrl%>" class="img-fluid" alt="News Image">
@@ -19,6 +19,50 @@
                             </div>
                         </div>
                     </a>
+                </div>
+                <div class="col-lg-4 user-box align-items-end bg-dark pb-4 d-none d-lg-flex">
+                    <div class="container text-light">
+                        <%if(!isAuth) {%>
+                            <form class="" action="/login" method="POST">
+                                <div class="mb-3">
+                                    <label for="email"><%=translation.E_MAIL%></label>
+                                    <input 
+                                        name="email" 
+                                        type="email" 
+                                        class="form-control form-control-sm" 
+                                        id="email" placeholder="<%=translation.E_MAIL%>" 
+                                    >
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password"><%=translation.PASSWORD%></label>
+                                    <input 
+                                        name="password" 
+                                        type="password" 
+                                        class="form-control form-control-sm" 
+                                        id="password" 
+                                        placeholder="<%=translation.PASSWORD%>"
+                                    >
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                                    <button class="btn btn-outline-success btn-sm" type="submit"><%=translation.SIGN_IN%></button>
+                                </div>
+                            </form>
+                            <p class="mt-2 text-center"><strong><%=translation.MESSAGES.DONT_HAVE_ACCOUNT%></strong></p>
+                            <div class="d-grid gap-2">
+                                <a class="btn btn-outline-success btn-sm" href="/signup" role="button"><%=translation.NAV.JOIN_US%></a>
+                            </div>
+                        <%} else {%>
+                            <div class="card mx-auto bg-dark border-light px-5" style="width: 15rem;">
+                                <img src="/img/avatar-default.png" class="card-img-top" alt="user-avatar">
+                                <div class="card-body">
+                                  <p class="card-text"><span class="fw-bold">
+                                    <%=translation.USERNAME%>: </span> <%=user.username%>
+                                  </p>
+                                </div>
+                              </div>
+                        <%}%>
+                    </div>
                 </div>
             </div>
             <div class="row">

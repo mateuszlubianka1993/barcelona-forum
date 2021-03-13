@@ -49,7 +49,8 @@
     "MESSAGES": {
         "DID_NOT_ADD_COMMENT_YET": "Jeszcze nie dodałeś żadnych komentarzy.",
         "HAVE_NOT_LIKE_COMMENT_YET": "Jeszcze nie masz polubionych komentarzy",
-        "CHANGE_SYSTEM_LANGUAGE": "Zmień język systemu"
+        "CHANGE_SYSTEM_LANGUAGE": "Zmień język systemu",
+        "DONT_HAVE_ACCOUNT": "Nie masz konta?"
     },
     "LANGUAGES": {
         "POLISH": "Polski",
