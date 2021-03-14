@@ -4,7 +4,7 @@
     <%- include('../includes/nav.ejs') %>
     <main>
         <h1 class="text-center mb-3 mt-3">Admin News List!</h1>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <% if (news.length > 0) { %>
                     <% for (let newsItem of news) { %>
@@ -21,11 +21,6 @@
                                 </div>
                             </a>    
                         </div>
-                        <!-- <div><%= newsItem.title %></div>
-                        <div><%= newsItem.imageUrl %></div>
-                        <div><%= newsItem.description %></div>
-                        <div><%= newsItem.content %></div>
-                        <button><a href="/news-list/<%=newsItem._id%>">See news</a></button> -->
                     <% } %>
                 <% } else { %>
                     <h2>There are not any news.</h2>

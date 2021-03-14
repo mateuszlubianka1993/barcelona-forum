@@ -4,7 +4,7 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <div class="card">
+        <div class="card container">
             <img src="/<%= newsItem.imageUrl %>" class="card-img-top" alt="News Image">
             <div class="card-body">
               <h5 class="card-title"><%= newsItem.title %></h5>
@@ -13,23 +13,23 @@
               <%if(isAuth) {%>    
                 <form action="/favouriteNewsList" method="post">
                     <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                    <button type="submit" class="btn btn-primary">Dodaj do ulubionych</button>
+                    <button type="submit" class="btn btn-primary"><%=translation.ADD_TO_FAVOURITE%></button>
                     <input type="hidden" name="newsId" value="<%=newsItem._id%>">
                 </form>
             <%}%>
             </div>
         </div> 
         <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid">
+            <div class="container">
               <h4><span class="navbar-brand mb-0 h1">
-                Comments</span></h4>
+                <%=translation.COMMENTS%></span></h4>
             </div>
         </nav>
         <div class="container position-relative pt-3 pb-3">
             <%if(isAuth) {%>
                 <form class="col-10 col-md-8 m-auto" action="/add-comment" method="POST">
                     <div class="mb-3">
-                        <label for="comment">Komentarz</label>
+                        <label for="comment"><%=translation.COMMENT%></label>
                         <textarea 
                             name="commentBody"
                             class="form-control" 
@@ -38,7 +38,7 @@
                     </div>
                     <input type="hidden" name="newsId" value="<%=newsItem._id%>">
                     <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-                    <button class="btn btn-primary" type="submit">Dodaj</button>
+                    <button class="btn btn-primary" type="submit"><%=translation.ADD%></button>
                 </form>
             <%}%>
             <%if(comments && comments.length >= 1) {%>
