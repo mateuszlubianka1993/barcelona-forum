@@ -59,5 +59,6 @@
         "POLISH": "Polish",
         "ENGLISH": "English"
     },
-    "WELCOME_TEXT": "Welcome to the BarcaForum!"
+    "WELCOME_TEXT": "Welcome to the BarcaForum!",
+    "NEWS_LIST": "News list"
 }
