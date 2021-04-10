@@ -1,3 +1,19 @@
 .comment-box {
     min-width: 500px;
 }
+
+.user-card {
+    width: 25rem;
+}
+
+@media (max-width: 768px) {
+    .user-card {
+        margin: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-card {
+        width: 17rem;
+    }
+}
