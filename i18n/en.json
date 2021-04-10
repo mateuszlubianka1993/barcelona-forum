@@ -58,5 +58,6 @@
     "LANGUAGES": {
         "POLISH": "Polish",
         "ENGLISH": "English"
-    }
+    },
+    "WELCOME_TEXT": "Welcome to the BarcaForum!"
 }

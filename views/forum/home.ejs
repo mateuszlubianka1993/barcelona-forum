@@ -54,14 +54,17 @@
                                 <a class="btn btn-outline-success btn-sm" href="/signup" role="button"><%=translation.NAV.JOIN_US%></a>
                             </div>
                         <%} else {%>
-                            <div class="card mx-auto bg-dark border-light d-flex flex-row" style="width: 12rem;">
-                                <img src="/img/avatar-default.png" class="card-img-top" style="width: 35%;" alt="user-avatar">
-                                <div class="card-body">
-                                  <p class="card-text text-center"><span class="fw-bold">
-                                    <%=user.username%> </span> 
-                                  </p>
+                            <div>
+                                <h3 class="text-center mb-4"><%=translation.WELCOME_TEXT%></h3>
+                                <div class="card mx-auto bg-dark border-light d-flex flex-row" style="width: 12rem;">
+                                    <img src="/img/avatar-default.png" class="card-img-top" style="width: 35%;" alt="user-avatar">
+                                    <div class="card-body">
+                                        <p class="card-text text-center"><span class="fw-bold">
+                                            <%=user.username%> </span> 
+                                        </p>
+                                    </div>
                                 </div>
-                              </div>
+                            </div>
                         <%}%>
                     </div>
                 </div>
