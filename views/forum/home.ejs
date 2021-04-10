@@ -4,7 +4,7 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <div class="container">
+        <div class="container home">
             <% if (news.length > 0) { %>
             <div class="row">
                 <div class="col-xs-12 nopadding col-lg-8">
@@ -21,7 +21,8 @@
                     </a>
                 </div>
                 <div class="col-lg-4 user-box align-items-end bg-dark pb-4 d-none d-lg-flex">
-                    <div class="container text-light">
+                    <div class="container text-light user-box-content">
+                        <img src="/img/fcb_logo.png" class="img-fluid logo-img" alt="fcb-logo">
                         <%if(!isAuth) {%>
                             <form class="" action="/login" method="POST">
                                 <div class="mb-3">

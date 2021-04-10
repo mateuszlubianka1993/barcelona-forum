@@ -1,1 +1,12 @@
+.user-box-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+}
 
+.logo-img {
+    max-width: 60%;
+    display: block;
+    margin: 0 auto;
+}
