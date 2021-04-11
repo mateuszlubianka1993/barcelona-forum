@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "nodemon app.js",
+    "start": "NODE_ENV=production DB_USER=xiedzu1503 DB_PASS=mpJaGC9kRel7oPTF DB_NAME=forum node app.js",
     "start-server": "node app.js",
+    "start:dev": "nodemon app.js",
     "lint": "eslint **/*.js --ignore-pattern node_modules/ --ignore-pattern public/js/vendor/ --ignore-pattern public/js/edit-news.js",
     "lint:fix": "eslint --fix --ext .js,.jsx . --ignore-pattern node_modules/ --ignore-pattern public/js/vendor/ --ignore-pattern public/js/edit-news.js",
     "lint-all": "npm run lint && npm run lint:fix"

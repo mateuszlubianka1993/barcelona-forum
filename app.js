@@ -16,7 +16,7 @@ const User = require('./models/user');
 
 const {ROLE} = require('./utils/constants');
 
-const MONGODB_URI = 'mongodb+srv://xiedzu1503:mpJaGC9kRel7oPTF@cluster0.oqfff.mongodb.net/forum?retryWrites=true&w=majority';
+const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.oqfff.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const app = express();
 const store = new MongoDbStore({
