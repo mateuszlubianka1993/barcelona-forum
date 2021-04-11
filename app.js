@@ -11,6 +11,7 @@ const multer = require('multer');
 const {v4} = require('uuid');
 const i18n = require('i18n-express');
 const helmet = require('helmet');
+const compression = require('compression');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -51,6 +52,7 @@ const fileFilter = (req, file, callback) => {
 };
 
 app.use(helmet());
+app.use(compression());
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(multer({storage: fileStore, fileFilter: fileFilter}).single('image'));
