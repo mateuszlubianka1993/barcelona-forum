@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Forum for Fc Barcelona fans.",
   "main": "app.js",
+  "engines": {
+    "node": "14.15.4"
+  },
   "scripts": {
     "test": "test",
     "start": "NODE_ENV=production DB_USER=xiedzu1503 DB_PASS=mpJaGC9kRel7oPTF DB_NAME=forum node app.js",
