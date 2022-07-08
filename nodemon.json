@@ -1,7 +1,7 @@
 {
     "env": {
-        "DB_USER": "xiedzu1503",
-        "DB_PASS": "mpJaGC9kRel7oPTF",
+        "DB_USER": "xiedzu",
+        "DB_PASS": "eLOuKd35aN9y1Qrn",
         "DB_NAME": "forum"
     }
 }
