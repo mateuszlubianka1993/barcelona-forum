@@ -60,5 +60,6 @@
         "ENGLISH": "Angielski"
     },
     "WELCOME_TEXT": "Witamy na BarcaForum!",
-    "NEWS_LIST": "Lista news'ów"
+    "NEWS_LIST": "Lista news'ów",
+    "NO_NEWS": "Jeszcze nie ma żadnych newsów"
 }
