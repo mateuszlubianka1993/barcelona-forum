@@ -51,7 +51,9 @@ const fileFilter = (req, file, callback) => {
 	}
 };
 
-app.use(helmet());
+app.use(helmet({
+	contentSecurityPolicy: false,
+}));
 app.use(compression());
 
 app.use(bodyParser.urlencoded({extended: false}));
