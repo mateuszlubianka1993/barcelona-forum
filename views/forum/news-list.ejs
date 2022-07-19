@@ -23,7 +23,12 @@
                         </div>
                     <% } %>
                 <% } else { %>
-                    <h2>There are not any news.</h2>
+                    <h2><%=translation.NO_NEWS%></h2>
+                    <%if(isAuth && isAdminMod) {%>
+                        <a class="btn btn-primary" role="button" href="/admin/add-news">
+                            <%=translation.NAV.ADD_NEWS%>
+                        </a>
+                    <%}%>
                 <% } %>
             </div>
         </div>

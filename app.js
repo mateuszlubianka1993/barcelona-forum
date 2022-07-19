@@ -18,7 +18,7 @@ const User = require('./models/user');
 
 const {ROLE} = require('./utils/constants');
 
-const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.oqfff.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.yjdesft.mongodb.net/?retryWrites=true&w=majority`;
 
 const app = express();
 const store = new MongoDbStore({
@@ -51,7 +51,9 @@ const fileFilter = (req, file, callback) => {
 	}
 };
 
-app.use(helmet());
+app.use(helmet({
+	contentSecurityPolicy: false,
+}));
 app.use(compression());
 
 app.use(bodyParser.urlencoded({extended: false}));
