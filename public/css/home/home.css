@@ -10,3 +10,12 @@
     display: block;
     margin: 0 auto;
 }
+
+.main-news .img-fluid {
+    width: 100%;
+    max-height: 426px;
+}
+
+.user-box-content .user-card {
+    overflow: hidden;
+}
