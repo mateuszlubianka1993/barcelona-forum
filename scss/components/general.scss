@@ -1,0 +1,26 @@
+body {
+    background-color: $background_color;
+}
+  
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+  
+.news {
+    position: relative;
+}
+  
+.mask {
+    position: absolute;
+    bottom: 0;
+    background: $color_black;
+    background: rgba($color_black, 0.5);
+    color: $mask_text_color;
+    width: 100%;
+    transition: .5s ease;
+    color: $color_white;
+    text-align: center;
+    height: 100%;
+}
+  

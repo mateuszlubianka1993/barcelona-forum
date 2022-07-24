@@ -4,16 +4,12 @@
 
 .user-card {
     width: 25rem;
-}
 
-@media (max-width: 768px) {
-    .user-card {
+    @media (max-width: 768px) {
         margin: auto;
     }
-}
 
-@media (max-width: 480px) {
-    .user-card {
+    @media (max-width: 480px) {
         width: 17rem;
     }
 }

@@ -8,12 +8,13 @@
   },
   "scripts": {
     "test": "test",
-    "start": "NODE_ENV=production node app.js",
-    "start-server": "node app.js",
-    "start:dev": "nodemon app.js",
+    "start": "NODE_ENV=production npm run scss && node app.js",
+    "start-server": "npm run scss && node app.js",
+    "start:dev": "npm run scss && nodemon app.js",
     "lint": "eslint **/*.js --ignore-pattern node_modules/ --ignore-pattern public/js/vendor/ --ignore-pattern public/js/edit-news.js",
     "lint:fix": "eslint --fix --ext .js,.jsx . --ignore-pattern node_modules/ --ignore-pattern public/js/vendor/ --ignore-pattern public/js/edit-news.js",
-    "lint-all": "npm run lint && npm run lint:fix"
+    "lint-all": "npm run lint && npm run lint:fix",
+    "scss": "sass scss/main.scss public/css/index.css"
   },
   "husky": {
     "hooks": {
@@ -44,7 +45,7 @@
     "connect-mongodb-session": "^2.4.1",
     "csurf": "^1.11.0",
     "ejs": "^3.1.5",
-    "express": "^4.17.1",
+    "express": "^4.18.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.9.2",
     "firebase": "^9.9.1",
@@ -56,6 +57,7 @@
     "multer-firebase-storage": "^3.0.3",
     "nodemailer": "^6.4.17",
     "nodemailer-sendgrid-transport": "^0.2.0",
+    "sass": "^1.54.0",
     "uuid": "^8.3.2"
   }
 }
