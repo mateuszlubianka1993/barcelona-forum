@@ -10,7 +10,7 @@
                     <% for (let newsItem of newsItems) { %>
                         <div class="col-xs-12 col-sm-4 col-md-3">
                             <div class="card mb-3">
-                                <img src="/<%= newsItem.newsId.imageUrl %>" class="card-img-top" alt="News Image">
+                                <img src="<%= newsItem.newsId.imageUrl %>" class="card-img-top" alt="News Image">
                                 <div class="card-body">
                                   <h5 class="card-title"><%= newsItem.newsId.title %></h5>
                                   <p class="card-text"><%= newsItem.newsId.description %></p>

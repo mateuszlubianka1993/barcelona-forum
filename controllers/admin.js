@@ -1,7 +1,27 @@
 const News = require('../models/news');
 const User = require('../models/user');
+const { getStorage, ref, getDownloadURL,  deleteObject  } = require('firebase/storage');
+const { initializeApp  } = require('firebase/app');
 
-const deleteFile = require('../utils/file');
+const firebaseConfig = {
+	apiKey: process.env.FIREBASE_APP_API_KEY,
+	authDomain: process.env.FIREBASE_APP_AUTH_DOMAIN,
+	projectId:process.env.FIREBASE_APP_PROJECT_ID,
+	storageBucket: process.env.FIREBASE_APP_STORAGE_BUCKET,
+	messagingSenderId: process.env.FIREBASE_APP_MESSAGE_SENDING_ID,
+	appId: process.env.FIREBASE_APP_ID,
+	measurementId: process.env.FIREBASE_APP_MEASURMENT_ID
+};
+
+initializeApp(firebaseConfig);
+
+const saveNews = (singleNews, res) => {
+	singleNews.save().then(() => {
+		res.redirect('/admin/news-list');
+	}).catch(err => {
+		console.log(err);
+	});
+};
 
 exports.getAddNews = (req, res) => {
 	res.render('admin/edit-news', {
@@ -25,24 +45,37 @@ exports.postAddNews = (req, res) => {
 		});
 	}
 
-	const imageUrl = image.path;
+	const imageName = image.path;
 
-	const singleNews = new News({
-		title: title, 
-		imageUrl: imageUrl, 
-		description: description, 
-		content: content,
-		userId: req.user
-	});
-	singleNews.save().then(() => {
-		res.redirect('/admin/news-list');
-	}).catch(err => {
-		console.log(err);
-	});
+	const storage = getStorage();
+	const starsRef = ref(storage, imageName);
+
+	getDownloadURL(starsRef).then((url) => {
+		const singleNews = new News({
+			title: title, 
+			imageUrl: url, 
+			description: description, 
+			content: content,
+			userId: req.user
+		});
+		
+		saveNews(singleNews, res);
+	})
+		.catch((err) => {
+			console.log(err);
+			const singleNews = new News({
+				title: title, 
+				imageUrl: null,
+				description: description, 
+				content: content,
+				userId: req.user
+			});
+
+			saveNews(singleNews, res);
+		});
 };
 
 exports.getNewsList = (req, res) => {
-	// News.find({userId: req.user._id})
 	News.find()
 		.then(news => {
 			res.render('admin/news-list', {
@@ -91,8 +124,19 @@ exports.postEditNews = (req, res) => {
 			}
 			news.title = updatedTitle;
 			if(image) {
-				deleteFile(news.imageUrl);
-				news.imageUrl = image.path;
+				const storage = getStorage();
+				const starsRef = ref(storage, news.imageUrl);
+
+				deleteObject(starsRef).then(() => {
+					news.description = updatedDescription;
+					news.content = updatedContent;
+					news.imageUrl = image.path;
+
+					return news.save()
+						.then(() => {
+							res.redirect('/admin/news-list');
+						});		
+				});
 			}
 			news.description = updatedDescription;
 			news.content = updatedContent;
@@ -113,8 +157,16 @@ exports.postDeleteNews = (req, res) => {
 			console.log('Can not find news.');
 			return;
 		}
-		deleteFile(news.imageUrl);
-		return News.deleteOne({_id: newsId, userId: req.user._id});
+
+		const storage = getStorage();
+		const starsRef = ref(storage, news.imageUrl);
+
+		return deleteObject(starsRef).then(() => {
+			return News.deleteOne({_id: newsId, userId: req.user._id});
+		}).catch((error) => {
+			console.log(error);
+			return News.deleteOne({_id: newsId, userId: req.user._id});
+		});
 	})
 		.then(() => {
 			res.redirect('/admin/news-list');
@@ -144,7 +196,7 @@ exports.postDeleteUser = (req, res) => {
 			console.log('Can not find user.');
 			return;
 		}
-		// deleteFile(news.imageUrl);
+
 		return User.deleteOne({_id: userID});
 	})
 		.then(() => {
