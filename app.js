@@ -8,10 +8,10 @@ const MongoDbStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
 const connectFlash = require('connect-flash');
 const multer = require('multer');
-const {v4} = require('uuid');
 const i18n = require('i18n-express');
 const helmet = require('helmet');
 const compression = require('compression');
+const FirebaseStorage = require('multer-firebase-storage');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -34,15 +34,6 @@ const adminRoutes = require('./routes/admin');
 const forumRoutes = require('./routes/forum');
 const authRoutes = require('./routes/auth');
 
-const fileStore = multer.diskStorage({
-	destination: (req, file, callback) => {
-		callback(null, 'images');
-	},
-	filename: (req, file, callback) => {
-		callback(null, v4() + '-' + file.originalname);
-	}
-});
-
 const fileFilter = (req, file, callback) => {
 	if(file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
 		callback(null, true);
@@ -57,7 +48,26 @@ app.use(helmet({
 app.use(compression());
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(multer({storage: fileStore, fileFilter: fileFilter}).single('image'));
+
+const firebaseCredentials = {
+	type: process.env.FIREBASE_STORAGE_TYPE,
+	project_id: process.env.FIREBASE_STORAGE_PROJECT_ID,
+	private_key_id: process.env.FIREBASE_STORAGE_PRIVATE_KEY_ID,
+	private_key: process.env.FIREBASE_STORAGE_PRIVATE_KEY,
+	client_email: process.env.FIREBASE_STORAGE_CLIENT_EMAIL,
+	client_id: process.env.FIREBASE_STORAGE_CLIENT_ID,
+	auth_uri: process.env.FIREBASE_STORAGE_AUTH_URI,
+	token_uri: process.env.FIREBASE_STORAGE_TOKEN_URI,
+	auth_provider_x509_cert_url: process.env.FIREBASE_STORAGE_AUTH_PROVIDER,
+	client_x509_cert_url: process.env.FIREBASE_STORAGE_CLIENT_CERT_URL,
+};
+app.use(multer({
+	storage: FirebaseStorage({
+		bucketName: 'barcelona-forum.appspot.com',
+		credentials: firebaseCredentials,
+	}),
+	fileFilter: fileFilter,
+}).single('image'));
 
 const dirname = path.resolve();
 app.use(express.static(path.join(dirname, 'public')));
