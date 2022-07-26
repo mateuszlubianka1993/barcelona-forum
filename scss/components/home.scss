@@ -3,6 +3,7 @@
     flex-direction: column;
     height: 100%;
     justify-content: space-evenly;
+    padding-top: 15px;
 
     .user-card {
         overflow: hidden;
@@ -12,6 +13,17 @@
         max-width: 60%;
         display: block;
         margin: 0 auto;
+    }
+
+    .btn-outline-success {
+        color: $theme_gold;
+        border-color: $theme_gold;
+
+        &:hover {
+            background-color: $theme_gold;
+            color: $dark_gray_1;
+            border-color: $dark_gray_1;
+        }
     }
 }
 

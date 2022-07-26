@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100%;
   justify-content: space-evenly;
+  padding-top: 15px;
 }
 .user-box-content .user-card {
   overflow: hidden;
@@ -11,6 +12,15 @@
   max-width: 60%;
   display: block;
   margin: 0 auto;
+}
+.user-box-content .btn-outline-success {
+  color: #EDBB00;
+  border-color: #EDBB00;
+}
+.user-box-content .btn-outline-success:hover {
+  background-color: #EDBB00;
+  color: #212529;
+  border-color: #212529;
 }
 
 .main-news {
@@ -86,6 +96,19 @@ body {
   color: #FFF;
   text-align: center;
   height: 100%;
+}
+
+.main-header .navbar {
+  background-color: #A50044 !important;
+}
+.main-header .navbar .form-inline .btn-outline-success {
+  color: #EDBB00;
+  border-color: #EDBB00;
+}
+.main-header .navbar .form-inline .btn-outline-success:hover {
+  background-color: #EDBB00;
+  color: #A50044;
+  border-color: #A50044;
 }
 
 /*# sourceMappingURL=index.css.map */
