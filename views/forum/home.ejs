@@ -8,12 +8,11 @@
             <div class="row">
                 <div class="col-xs-12 nopadding col-lg-8">
                     <a href="/news-list/<%=news[0]._id%>">
-                        <div class="main-news news">
-                            <img src="<%=news[0].imageUrl%>" class="img-fluid" alt="News Image">
+                        <div class="main-news news" style="background-image: url(<%=news[0].imageUrl%>);">
                             <div class="mask">
                                 <div class="content position-absolute top-50 start-50 translate-middle">
                                     <h3><%=news[0].title%></h3>
-                                    <h4><%=news[0].description%></h4>
+                                    <h4 class="description"><%=news[0].description%></h4>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row news-list">
                     <% for (let newsItem of news) { %>
                         <div class="col-6 col-md-4 nopadding">
                             <a href="/news-list/<%=newsItem._id%>">
@@ -77,7 +76,7 @@
                                     <div class="mask">
                                         <div class="content position-absolute top-50 start-50 translate-middle">
                                             <h5><%=newsItem.title%></h4>
-                                            <h6><%=newsItem.description%></h5>
+                                            <h6 class="description"><%=newsItem.description%></h5>
                                         </div>
                                     </div>
                                 </div>
