@@ -2,7 +2,7 @@
 </head>
 <body>
     <%- include('../includes/nav.ejs') %>
-    <main>
+    <main class="adminNewsList">
         <h1 class="text-center mb-3 mt-3">Admin News List!</h1>
         <% if (news.length > 0) { %>
             <div class="container">
@@ -17,8 +17,8 @@
                                     <form action="/admin/delete-news" method="POST" class="d-grid gap-2">
                                         <input type="hidden" name="_csrf" value="<%=csrfToken%>">
                                         <input type="hidden" name="newsId" value="<%=newsItem._id%>">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                        <a href="/admin/edit-news/<%=newsItem._id%>?edit=true" class="btn btn-primary">Edit</a>
+                                        <button type="submit" class="btn btn-danger adminNewsList__deleteBtn">Delete</button>
+                                        <a href="/admin/edit-news/<%=newsItem._id%>?edit=true" class="btn btn-primary adminNewsList__editBtn"">Edit</a>
                                     </form>
                                 </div>
                               </div>

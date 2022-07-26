@@ -111,4 +111,11 @@ body {
   border-color: #A50044;
 }
 
+.adminNewsList__deleteBtn {
+  background-color: #A50044;
+}
+.adminNewsList__editBtn {
+  background-color: #004D98;
+}
+
 /*# sourceMappingURL=index.css.map */
