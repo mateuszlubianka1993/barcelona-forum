@@ -1,0 +1,18 @@
+.main-header {
+    .navbar {
+        background-color: $theme_burgundy !important;
+
+        .form-inline {
+            .btn-outline-success {
+                color: $theme_gold;
+                border-color: $theme_gold;
+
+                &:hover {
+                    background-color: $theme_gold;
+                    color: $theme_burgundy;
+                    border-color: $theme_burgundy;
+                }
+            }
+        }
+    }
+}
