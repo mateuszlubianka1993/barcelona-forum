@@ -69,8 +69,8 @@
             </div>
             <div class="row news-list">
                     <% for (let newsItem of news) { %>
-                        <div class="col-6 col-md-4 nopadding">
-                            <a href="/news-list/<%=newsItem._id%>">
+                        <div class="col-6 col-md-4 nopadding" class="item-box">
+                            <a href="/news-list/<%=newsItem._id%>" class="item-box--link">
                                 <div class="news">
                                     <img src="<%=newsItem.imageUrl%>" class="img-fluid" alt="News Image">    
                                     <div class="mask">
