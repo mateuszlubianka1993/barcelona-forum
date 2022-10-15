@@ -6,6 +6,7 @@ exports.getHome = (req, res) => {
 	const user = req.user;
 
 	News.find()
+		.sort({_id: -1})
 		.then(news => {
 			res.render('forum/home', {
 				pageTitle: 'Forum Home Page',
@@ -21,6 +22,7 @@ exports.getHome = (req, res) => {
 
 exports.getNewsList = (req, res) => {
 	News.find()
+		.sort({_id: -1})
 		.then(news => {
 			res.render('forum/news-list', {
 				pageTitle: 'Forum News List',
