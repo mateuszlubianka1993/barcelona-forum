@@ -1,5 +1,3 @@
 # .gitignore 
 node_modules 
 nodemon.json
-index.css
-index.css.map
