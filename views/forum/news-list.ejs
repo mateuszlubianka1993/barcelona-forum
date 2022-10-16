@@ -4,12 +4,12 @@
     <%- include('../includes/nav.ejs') %>
     <main>
         <h1 class="text-center mb-3 mt-3"><%=translation.NEWS_LIST%></h1>
-        <div class="container">
+        <div class="container news-list">
             <div class="row">
                 <% if (news.length > 0) { %>
                     <% for (let newsItem of news) { %>
                         <div class="col-6 col-md-4 nopadding item-box">
-                            <a href="/news-list/<%=newsItem._id%>">
+                            <a href="/news-list/<%=newsItem._id%>" class="item-box--link">
                                 <div class="news">
                                     <img src="<%=newsItem.imageUrl%>" class="img-fluid" alt="News Image">    
                                     <div class="mask">
